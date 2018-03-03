@@ -8,11 +8,16 @@ using UnityEngine;
 
 public class MeshSeparator : MonoBehaviour
 {
-
+    public float requiredMagnitudeToBreak = 8.5f;
 
     private void OnCollisionEnter(Collision other)
     {
-        IdentifyPropGameObject(other.gameObject);
+        Debug.Log(other.relativeVelocity.magnitude);
+
+        if (other.relativeVelocity.magnitude > requiredMagnitudeToBreak)
+        {
+            IdentifyPropGameObject(other.gameObject);
+        }
     }
 
     private void IdentifyPropGameObject(GameObject other)
