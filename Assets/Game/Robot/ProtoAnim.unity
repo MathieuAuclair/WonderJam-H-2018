@@ -113,23 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &224609281 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1279940086364328, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-    type: 2}
-  m_PrefabInternal: {fileID: 367109507}
---- !u!65 &224609287
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 224609281}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.14, y: 1.94, z: 1.97}
-  m_Center: {x: 0, y: 0.007278504, z: 1.02}
 --- !u!1001 &367109507
 Prefab:
   m_ObjectHideFlags: 0
@@ -169,43 +152,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 65207719538089622, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 29.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 65207719538089622, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 15.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 65430178751076860, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 28.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 65430178751076860, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 16.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 153133281802523724, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.z
-      value: 0.046079632
-      objectReference: {fileID: 0}
-    - target: {fileID: 153133281802523724, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_Anchor.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 153133281802523724, guid: ecbc2829a40c3364c9474ec9909a8fc5,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.y
-      value: -0.08097057
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 135069822577206014, guid: ecbc2829a40c3364c9474ec9909a8fc5, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecbc2829a40c3364c9474ec9909a8fc5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &740906555
