@@ -5,6 +5,7 @@ public class Robot : Character
     [Header("Modules")]
     [SerializeField] MovementModule movement;
     [SerializeField] JetPackModule jetpack;
+    [SerializeField] TorsoModule torso;
 
     [Header("Sensors")]
     [SerializeField] GroundSensor ground;
@@ -15,6 +16,7 @@ public class Robot : Character
             {
                 movement,
                 jetpack,
+                torso,
             });
 
         ground.Initialize();
@@ -25,6 +27,7 @@ public class Robot : Character
     {
         Controller.Subscribe(CharacterAction.MOVE, Move);
         Controller.Subscribe(CharacterAction.JETPACK, jetpack.Begin, jetpack.End);
+        Controller.Subscribe(CharacterAction.TORSO, torso.Rotate);
     }
 
     void Move(float h, float v)

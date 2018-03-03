@@ -4,15 +4,18 @@ public static class CharacterAction
 {
     public const string MOVE = "Move";
     public const string JETPACK = "P{0}Jump";
+    public const string TORSO = "Torso";
 }
 
 /// <summary>
 /// Manages character movements and actions.
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
 [System.Serializable]
 public abstract class Character : MonoBehaviour
 {
+    [SerializeField] Animator animator;
+    [SerializeField] Rigidbody body;
+
     CharacterModule[] modules;
     InputController controller;
 
@@ -37,7 +40,7 @@ public abstract class Character : MonoBehaviour
         Transform moduleParent = transform;
         foreach (CharacterModule module in modules)
         {
-            module.Initialize(moduleParent);
+            module.Initialize(moduleParent, animator, body);
         }
     }
 
