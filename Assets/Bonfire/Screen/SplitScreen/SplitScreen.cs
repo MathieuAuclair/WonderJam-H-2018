@@ -34,7 +34,7 @@ namespace Bonfire
         }
 
         [SerializeField] TwoByTwoDynamicRectGrid dynamicRectGrid;
-        [SerializeField] Camera basePlayerCamera;
+        [SerializeField] PlayerView basePlayerCamera;
 
         IDictionary<Transform, View> mappedViews = new Dictionary<Transform, View>();
         TwoByTwoDynamicRectGrid.CellQuadrant[] orderedPreferredPositions = new TwoByTwoDynamicRectGrid.CellQuadrant[]
@@ -51,19 +51,7 @@ namespace Bonfire
 
         public override void Register(Transform screenedEntity)
         {
-		
-            Transform cameraHolder = GetCameraHolder(screenedEntity);
-
-            var entityView = InitializeAndMapViewTo(screenedEntity);
-
-            // TODO: CAMERA SHOULD NOT BE A CHILD OF THE GAME OBJECT
-            //		It should NOT have a "Cameraman" component which takes the character's transform as a "target".
-            //      
-            //		It could make itself a child of the character, but preferably not: it should prioritize moving
-            //		accordingly to its target transform location and rotation.
-            //		Even then, a cameraman should wrap a "Follower" since there is no need for a camera to follow something.
-            entityView.camera.transform.AddAndFitTo(cameraHolder);
-            // END TODO
+            InitializeAndMapViewTo(screenedEntity);
         }
 
         public override void Update()
@@ -97,21 +85,12 @@ namespace Bonfire
 		
         }
 
-        Transform GetCameraHolder(Transform screenedEntity)
-        {
-            Cameraman cameraman = screenedEntity.GetComponentInChildren<Cameraman>();
-            if (cameraman == null)
-            {
-                Debug.LogWarningFormat("No Cameraman component found in {0}'s children. Using {0}'s Transform instead.", screenedEntity.name);
-                return screenedEntity;
-            }
-            return cameraman.transform;
-        }
-
         View InitializeAndMapViewTo(Transform key)
         {
             var quadrant = GetNextPreferredQuadrant();
-            var camera = (Camera)GameObject.Instantiate(basePlayerCamera);
+            var playerView = Object.Instantiate(basePlayerCamera);
+            var camera = playerView.View;
+            playerView.SetTarget(key);
             var view = new View(camera, quadrant);
             mappedViews.Add(key, view);
             dynamicRectGrid.SetRectActive(quadrant, true);

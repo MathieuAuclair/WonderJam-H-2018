@@ -53,5 +53,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dynamicRectGrid:
     progressPerSecond: 2
-  basePlayerCamera: {fileID: 20286731974074064, guid: 47e999c26d8e237439b1c59bc03c61c5,
+  basePlayerCamera: {fileID: 114875362383479614, guid: b9537bfcdb4597b42aa13d48d835f5da,
     type: 2}

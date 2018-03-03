@@ -38,6 +38,8 @@ public class PlayerView : MonoBehaviour
 
     public float Angle { get { return transform.eulerAngles.y; } }
 
+    public Camera View { get { return view.GetComponent<Camera>(); } }
+
     Rigidbody targetBody;
     float targetHeight;
 
