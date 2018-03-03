@@ -7,9 +7,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] Bonfire.Screen screen;
     [SerializeField] PlayerController playerPrefab;
+    [SerializeField] int playerCount = 4;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
-    int playerCount;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         screen.Update();
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= playerCount; i++)
         {
             if (!players.ContainsKey(i) && Input.GetButtonDown(string.Format(JOIN, i)))
             {
