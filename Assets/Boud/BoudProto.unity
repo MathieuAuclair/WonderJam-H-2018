@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1000d71543aa93c47b2249a905d3b894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screen: {fileID: 114302923288511792, guid: a4d799eb2c20db845807d84132cfb850, type: 2}
 --- !u!4 &74468803
 Transform:
   m_ObjectHideFlags: 0
@@ -311,7 +312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &691295019
 AudioListener:
   m_ObjectHideFlags: 0
