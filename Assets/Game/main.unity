@@ -230,9 +230,9 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 203274255}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: -4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.050865818, y: -0.40985337, z: 0.022894753, w: -0.91044426}
+  m_LocalPosition: {x: -6.3821745, y: 5.1812043, z: -5.6521177}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 544175230}
   m_Father: {fileID: 0}
@@ -288,15 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced4f0d4245d8874aa5cb9036c988e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CutPlaneDistance: 1.5
-  CutPlaneSize: 3
-  _lineRenderer: {fileID: 0}
-  _camera: {fileID: 0}
-  _transform: {fileID: 0}
-  _inCutMode: 0
-  _hasStartPos: 0
-  _startPos: {x: 0, y: 0, z: 0}
-  _endPos: {x: 0, y: 0, z: 0}
 --- !u!120 &544175232
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -492,6 +483,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114492910650358146, guid: e4cd49ca9c6054dabb93e684d0c6cb2e,
+        type: 2}
+      propertyPath: BuildingModels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4391525421900090, guid: e4cd49ca9c6054dabb93e684d0c6cb2e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 13.751526
@@ -523,6 +519,23 @@ Prefab:
     - target: {fileID: 4391525421900090, guid: e4cd49ca9c6054dabb93e684d0c6cb2e, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492910650358146, guid: e4cd49ca9c6054dabb93e684d0c6cb2e,
+        type: 2}
+      propertyPath: BuildingModels.Array.data[1]
+      value: 
+      objectReference: {fileID: 1689140724647524, guid: 6ff6d89b46c624dedb113c35f1ce55e5,
+        type: 2}
+    - target: {fileID: 114492910650358146, guid: e4cd49ca9c6054dabb93e684d0c6cb2e,
+        type: 2}
+      propertyPath: BuildingModels.Array.data[0]
+      value: 
+      objectReference: {fileID: 1438107534246134, guid: 13ac14c2fafe249e2a3f35835a8a7f35,
+        type: 2}
+    - target: {fileID: 114492910650358146, guid: e4cd49ca9c6054dabb93e684d0c6cb2e,
+        type: 2}
+      propertyPath: Tiling
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4cd49ca9c6054dabb93e684d0c6cb2e, type: 2}
