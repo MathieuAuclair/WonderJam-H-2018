@@ -149,13 +149,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingModels:
-  - {fileID: 1245158615053598, guid: 29485f14873df7a4db4c63c17f048402, type: 2}
+  - {fileID: 1438107534246134, guid: 13ac14c2fafe249e2a3f35835a8a7f35, type: 2}
+  - {fileID: 1689140724647524, guid: 6ff6d89b46c624dedb113c35f1ce55e5, type: 2}
   Roads: {fileID: 1428348832027412, guid: 4e7c1b4b67af6e84893527ca0be23d2c, type: 2}
   Instances: {fileID: 1698987064311434, guid: a88563f0067b8d64b892b20514a65db2, type: 2}
   BuildingSpace: 4.5
   NbOfCities: 1
-  RoadWidth: 2
+  RoadWidth: 4
   Tiling: 5000
+  MapSize: 50
   RoadMaterial: {fileID: 2100000, guid: 1fe2adad338f9fe4a90314566ac085e2, type: 2}
   IntersectionMaterial: {fileID: 2100000, guid: f63e592fda04db947b935ac6da949442,
     type: 2}
