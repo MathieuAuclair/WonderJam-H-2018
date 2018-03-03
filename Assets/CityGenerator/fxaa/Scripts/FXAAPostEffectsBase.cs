@@ -75,7 +75,7 @@ public class FXAAPostEffectsBase : MonoBehaviour
 		isSupported = true;
 		supportHDRTextures = SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf);
 		
-		if (!SystemInfo.supportsImageEffects || !SystemInfo.supportsRenderTextures) {
+		if (!SystemInfo.supportsImageEffects) {
 			NotSupported ();
 			return false;
 		}		
