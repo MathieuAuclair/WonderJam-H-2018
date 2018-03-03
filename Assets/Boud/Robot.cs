@@ -14,7 +14,8 @@ public class Robot : Character
             {
                 movement,
             });
-        
+
+        ground.Initialize();
         movement.Ground = ground;
 
         SetController(GetComponent<InputController>());
@@ -29,5 +30,16 @@ public class Robot : Character
     {
         var input = new Vector2(h, v);
         movement.MoveTowardsLocal(h, v, input.sqrMagnitude >= 1 ? 1 : input.magnitude);
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        ground.SenseAny();
+    }
+
+    void OnDrawGizmos()
+    {
+        ground.DrawGizmo();
     }
 }

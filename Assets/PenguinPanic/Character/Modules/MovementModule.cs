@@ -116,7 +116,7 @@ public class MovementModule : CharacterModule
         if (horizontalDirection != Vector3.zero)
         {
             Quaternion baseRotation = Parent.rotation;
-            Quaternion targetRotation = Quaternion.LookRotation(horizontalDirection);
+            Quaternion targetRotation = Quaternion.LookRotation(horizontalDirection, Vector3.up);
             Parent.rotation = Quaternion.Lerp(
                 baseRotation, targetRotation, 10 * Time.fixedDeltaTime);
         }
