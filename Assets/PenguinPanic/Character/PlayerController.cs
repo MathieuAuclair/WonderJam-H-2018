@@ -100,7 +100,6 @@ public class PlayerController : InputController
             Input.GetAxis(inputMapping[AIM_HORIZONTAL]),
             Input.GetAxis(inputMapping[AIM_VERTICAL]));
         
-        BiaxialAction(PlayerAction.ROTATE_VIEW, aim.x, aim.y);
 
         if (View != null)
         {
@@ -108,6 +107,7 @@ public class PlayerController : InputController
             move = move.Rotate(-View.Angle);
         }
 
+        BiaxialAction(CharacterAction.TORSO, aim.x, aim.y);
         BiaxialAction(CharacterAction.MOVE, move.x, move.y);
     }
 }

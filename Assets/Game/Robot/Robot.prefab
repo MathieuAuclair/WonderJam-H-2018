@@ -146,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4957463814542424}
   - component: {fileID: 54446938564498426}
-  - component: {fileID: 114402300313558336}
+  - component: {fileID: 114445507606911534}
   m_Layer: 8
   m_Name: Hips
   m_TagString: Untagged
@@ -588,7 +588,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -698,7 +698,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114402300313558336
+--- !u!114 &114445507606911534
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -710,6 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95725127135505540}
+  body: {fileID: 54446938564498426}
   movement:
     enabled: 1
     stateBoolean: isWalking
@@ -724,7 +725,8 @@ MonoBehaviour:
   torso:
     enabled: 1
     stateBoolean: 
-    torso: {fileID: 0}
+    torso: {fileID: 54253436142811556}
+    power: 30
   ground:
     radius: 1.6
     layers:

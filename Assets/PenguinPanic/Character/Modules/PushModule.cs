@@ -10,9 +10,9 @@ public class PushModule : CharacterModule
     [SerializeField] Sensor floatingObject;
     [SerializeField] float power;
 
-    public override void Initialize(Transform parent, Animator animator)
+    public override void Initialize(Transform parent, Animator animator, Rigidbody body)
     {
-        base.Initialize(parent, animator);
+        base.Initialize(parent, animator, body);
         floatingObject.Initialize();
     }
 
