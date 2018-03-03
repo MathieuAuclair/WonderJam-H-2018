@@ -558,7 +558,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0.05
-  m_AngularDrag: 0.05
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -726,7 +726,7 @@ MonoBehaviour:
     enabled: 1
     stateBoolean: 
     torso: {fileID: 54253436142811556}
-    power: 30
+    power: 100
   ground:
     radius: 1.6
     layers:
