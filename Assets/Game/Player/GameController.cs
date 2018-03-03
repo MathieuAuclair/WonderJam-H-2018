@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
+    enum Phase
+    {
+        REGISTRATION,
+        COUNTDOWN,
+        GAME,
+        END,
+    }
+
     const string JOIN = "P{0}Jump";
 
     [SerializeField] Bonfire.Screen screen;
@@ -10,6 +18,8 @@ public class GameController : MonoBehaviour
     [SerializeField] int playerCount = 4;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
+
+    Phase currentPhase;
 
     void Start()
     {
@@ -19,21 +29,56 @@ public class GameController : MonoBehaviour
     void Update()
     {
         screen.Update();
+
+        switch (currentPhase)
+        {
+            case Phase.REGISTRATION:
+                UpdateRegistration();
+                break;
+            case Phase.COUNTDOWN:
+                UpdateCountdown();
+                break;
+            case Phase.GAME:
+                break;
+        }
+    }
+
+    void UpdateRegistration()
+    {
         for (int i = 1; i <= playerCount; i++)
         {
-            if (!players.ContainsKey(i) && Input.GetButtonDown(string.Format(JOIN, i)))
+            if (!players.ContainsKey(i))
             {
-                AddPlayer(i);
+                if (Input.GetButtonDown(string.Format(JOIN, i)))
+                {
+                    AddPlayer(i);
+                }
+            }
+            else if (Input.GetButtonDown("StartGame"))
+            {
+                currentPhase = Phase.COUNTDOWN;
             }
         }
+    }
+
+    void UpdateCountdown()
+    {
+        Debug.Log("Counting down");
     }
 
     void AddPlayer(int playerId)
     {
         var player = Instantiate(playerPrefab);
         player.PlayerId = playerId;
-        player.GetComponentInChildren<Character>().SetController(player);
         screen.Register(player.GetComponentInChildren<Character>().transform);
         players.Add(playerId, player);
+    }
+
+    void GiveControl()
+    {
+        foreach (var player in players.Values)
+        {
+            player.GetComponentInChildren<Character>().SetController(player);
+        }
     }
 }
