@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
 
 public class ControlRoads : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class ControlRoads : MonoBehaviour {
 	public List<RoadSegment> RoadSegments {get; private set;}
 	public List<Intersection> Intersections {get; private set;}
 	public float MapSize = 100f;
+	public float MapAngle = 120f; 
 
 	public Slider GridSlider;
 	public Text GridTypeText;
@@ -18,14 +20,15 @@ public class ControlRoads : MonoBehaviour {
 	public Buildings buildings;
 
 	public enum GridType {X_Type, Y_Type, O_Type};
-	public GridType currentType = GridType.X_Type;
+	private GridType currentType;
 
-	public static bool a = false;
+	public static bool generatorIdle = false;
 
 	// Use this for initialization
 	void Start () 
 	{
 		this.buildings = this.buildings.GetComponent<Buildings> ();
+		this.currentType = RandomEnumValue<GridType> ();
 		this.GenerateMap ();
 	}
 	
@@ -33,6 +36,12 @@ public class ControlRoads : MonoBehaviour {
 	void Update () 
 	{
 	
+	}
+
+	static T RandomEnumValue<T> ()
+	{
+		var v = Enum.GetValues (typeof (T));
+		return (T) v.GetValue (new System.Random ().Next(v.Length));
 	}
 
 	public void GridTypeClick()
@@ -45,16 +54,16 @@ public class ControlRoads : MonoBehaviour {
 	{
 		//if (Buildings.Splitting)
 		//	return;
-		a = false;
+		generatorIdle = false;
 		this.buildings.Clear ();
 
 		this.network = new RoadNetwork (this.MapSize);
 		if(this.currentType == GridType.X_Type)
-			this.network.AddCityCentreX (new Vector2(0,0), 120f);
+			this.network.AddCityCentreX (new Vector2(0,0), MapAngle);
 		else if(this.currentType == GridType.Y_Type)
-			this.network.AddCityCentreY (new Vector2(0,0), 120f);
+			this.network.AddCityCentreY (new Vector2(0,0), MapAngle);
 		else if(this.currentType == GridType.O_Type)
-			this.network.AddCityCentreO (new Vector2(0,0), 120f);
+			this.network.AddCityCentreO (new Vector2(0,0), MapAngle);
 
 		this.network.SplitSegments (0);
 		this.network.SplitSegments (0);
@@ -73,6 +82,6 @@ public class ControlRoads : MonoBehaviour {
 			this.roadRenderer.AddIntersection (inter);
 
 		this.RoadSegments = new List<RoadSegment> (this.network.RoadSegments);
-		a = true;
+		generatorIdle = true;
 	}
 }
