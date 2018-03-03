@@ -25,14 +25,10 @@ public class RoadNetwork
 	{
 		List<RoadSegment> segments = new List<RoadSegment> (this.RoadSegments);
 
-		int c = 0;
-		//foreach (RoadSegment segment in segments) {
 		for(int i=0;i<segments.Count;i++){
 			if(segments[i].Level == level)
 			{	
 				this.splitSegment (segments[i]);
-			//	if(++c == 2)
-			//		break;
 			}
 		}
 	}
@@ -607,5 +603,10 @@ public class RoadPoint
 			return true;
 
 		return false;
+	}
+
+	public override int GetHashCode() 
+	{
+		return point.GetHashCode ();
 	}
 }

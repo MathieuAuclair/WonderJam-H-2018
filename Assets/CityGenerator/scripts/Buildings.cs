@@ -63,9 +63,9 @@ public class Buildings : MonoBehaviour {
 
 	void Update()
 	{
-		if (ControlRoads.a) {
+		if (ControlRoads.generatorIdle) {
 			this.GenerateBuildings ();
-			ControlRoads.a = false;
+			ControlRoads.generatorIdle = false;
 		}
         if (Buildings.Splitting) {
 			this.checkSegment (this.splitList [0]);
@@ -87,7 +87,6 @@ public class Buildings : MonoBehaviour {
 		Vector2 dir = (end - start).normalized;
 		float distance = Vector2.Distance (start, end);
 
-		Vector2 current = start;
 		bool side = true;
 		for(float f=RoadRenderer._RoadWidth;f<distance || side;f+=4.5f)
 		{
@@ -302,18 +301,9 @@ public class Buildings : MonoBehaviour {
     /// <param name="uvs"></param>
 	private void GetQuad(Vector3[] vertices,ref int last, out int[] triangles,out Vector3[] normals, out Vector2[] uvs)
 	{
-		//create vertices
-		Vector3 vertTL = vertices [0];
-		Vector3 vertTR = vertices [1];
-		Vector3 vertBL = vertices [2];
-		Vector3 vertBR = vertices [3];
-
 		//set triangles
 		triangles = new int[]{ last, last + 2, last + 1, last + 1, last + 2, last + 3};
 		last += 4;
-
-		//get normals... gonna auto calculate
-		Vector3 nTL = Vector3.Cross ((vertTR - vertTL), (vertBL - vertTL));
 
 		//set normals
 		normals = new Vector3[]{};
