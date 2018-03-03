@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class RoadRenderer : MonoBehaviour 
+public class RoadRenderer 
 {
 	List<RoadSegment> roadSegments {get;set;}
 	float _roadWidth { get; set; }
 	float intersectionOffset { get; set; }
+
+	public GameObject roads;
 
 	public Material RoadMaterial;
 	public Material IntersectionMaterial;
@@ -22,10 +24,17 @@ public class RoadRenderer : MonoBehaviour
 
 	public static float _RoadWidth {get;private set;}
 
-	public RoadRenderer()
-	{
+	public void Start(){
 		this.roadSegments = new List<RoadSegment> ();
 		this.IntersectionList = new List<Intersection> ();
+		this._roadWidth = this.RoadWidth;
+		this.intersectionOffset = 0.5f * this.RoadWidth;
+
+		RoadRenderer._RoadWidth = this._roadWidth;
+
+		//setup mesh renderer
+		this.meshRenderer = this.roads.GetComponent<MeshRenderer> ();
+		this.meshRenderer.sharedMaterial = new Material (this.RoadMaterial);
 	}
 
 	public void ClearData()
@@ -34,24 +43,11 @@ public class RoadRenderer : MonoBehaviour
 		this.IntersectionList = new List<Intersection> ();
 
 		//setup mesh filters
-		this.meshFilter = this.GetComponent<MeshFilter> ();
+		this.meshFilter = this.roads.GetComponent<MeshFilter> ();
 		this.meshFilter.mesh = new Mesh ();
 		
 		this.Intersections.GetComponent<MeshFilter> ().mesh = new Mesh ();
 		this.Intersections.GetComponent<MeshRenderer> ().material = new Material (this.IntersectionMaterial);
-	}
-
-	void Start()
-	{
-		//set road width and intersection
-		this._roadWidth = this.RoadWidth;
-		this.intersectionOffset = 0.5f * this.RoadWidth;
-
-		RoadRenderer._RoadWidth = this._roadWidth;
-
-		//setup mesh renderer
-		this.meshRenderer = this.GetComponent<MeshRenderer> ();
-		this.meshRenderer.sharedMaterial = new Material (this.RoadMaterial);
 	}
 
 	/// <summary>
