@@ -13,6 +13,8 @@ public static class CharacterAction
 [System.Serializable]
 public abstract class Character : MonoBehaviour
 {
+    [SerializeField] protected Animator animator;
+
     CharacterModule[] modules;
     InputController controller;
 
@@ -37,7 +39,7 @@ public abstract class Character : MonoBehaviour
         Transform moduleParent = transform;
         foreach (CharacterModule module in modules)
         {
-            module.Initialize(moduleParent);
+            module.Initialize(moduleParent, animator);
         }
     }
 

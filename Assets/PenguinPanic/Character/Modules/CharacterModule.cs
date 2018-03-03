@@ -19,11 +19,11 @@ public class CharacterModule
         set { enabled = value; }
     }
 
-    public virtual void Initialize(Transform parent)
+    public virtual void Initialize(Transform parent, Animator animator)
     {
         Parent = parent;
         OwnBody = parent.GetComponent<Rigidbody>();
-        ownAnimator = parent.GetComponent<Animator>();
+        ownAnimator = animator;
     }
 
     public virtual void FixedUpdate()

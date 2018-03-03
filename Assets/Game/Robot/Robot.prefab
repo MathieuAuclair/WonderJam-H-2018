@@ -78,6 +78,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4443460624417648}
   - component: {fileID: 95744479615654478}
+  - component: {fileID: 114177291776866256}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -97,6 +98,7 @@ GameObject:
   - component: {fileID: 23728040666437430}
   - component: {fileID: 54854376781174174}
   - component: {fileID: 65947840658860126}
+  - component: {fileID: 114685153158796018}
   m_Layer: 0
   m_Name: Hips
   m_TagString: Untagged
@@ -502,7 +504,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!54 &54359032095068666
 Rigidbody:
@@ -517,7 +519,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!54 &54467136574096142
 Rigidbody:
@@ -638,6 +640,53 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114177291776866256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1385784971739212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc13b8a96fff334db9a05f1a8e761d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114685153158796018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397492748194902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36efa2e439c190147b5f8da35b9607e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 95744479615654478}
+  movement:
+    enabled: 1
+    stateBoolean: 
+    maximumSpeed: 3
+    maximumSlopeAngle: 50
+    wall: {fileID: 0}
+  jetpack:
+    enabled: 1
+    stateBoolean: 
+    power: 2000
+    fullCharge: 3
+  ground:
+    radius: 1.25
+    layers:
+      serializedVersion: 2
+      m_Bits: 1
+    senseTriggers: 0
+    tags: 
+    useLocalOffset: 1
+    source: {fileID: 4027496516441784, guid: b82e7f5b94386da4b9097435a53863f8, type: 2}
+    offset: {x: 0, y: -0.32, z: 0}
+    ray: {x: 0, y: -0.21, z: 0}
+    all: 0
+    maximumSlopeAngle: 50
 --- !u!153 &153133281802523724
 ConfigurableJoint:
   m_ObjectHideFlags: 1

@@ -14,14 +14,27 @@ public class PlayerController : InputController
     public const string VERTICAL_AXIS = "P{0}Vertical1";
     public const string JUMP = "P{0}Jump";
 
-    public int PlayerId { get; set; }
-
     IList<string> actions;
     IList<string> axialActions;
     Vector2 move;
     Vector2 aim;
     PlayerView _view;
     IDictionary<string, string> inputMapping;
+
+    int _playerId;
+
+    public int PlayerId
+    { 
+        get
+        {
+            return _playerId;
+        }
+        set
+        {
+            _playerId = value;
+            MapInputs();
+        }
+    }
 
     public PlayerView View
     {
@@ -35,8 +48,6 @@ public class PlayerController : InputController
 
     void Start()
     {
-        MapInputs();
-
         actions = new List<string>(1)
         {
             CharacterAction.JETPACK,

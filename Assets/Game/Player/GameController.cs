@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
     {
         var player = Instantiate(playerPrefab);
         player.PlayerId = playerId;
-        player.GetComponent<Character>().SetController(player);
+        player.GetComponentInChildren<Character>().SetController(player);
         screen.Register(player.transform);
         players.Add(playerId, player);
     }

@@ -32,9 +32,9 @@ public class SlideModule : CharacterModule
 
     public bool IsSliding { get; private set; }
 
-    public override void Initialize(Transform parent)
+    public override void Initialize(Transform parent, Animator animator)
     {
-        base.Initialize(parent);
+        base.Initialize(parent, animator);
         defaultConstraints = OwnBody.constraints;
         defaultDrag = OwnBody.drag;
     }
