@@ -5,7 +5,7 @@ using TMPro;
 public class PlayerName : MonoBehaviour
 {
 
-	public string name;
+	public new string name;
 	public TextAsset namesJson;
 	NameGenerator nameGenerator;
 	[SerializeField] TextMeshPro nameText;
