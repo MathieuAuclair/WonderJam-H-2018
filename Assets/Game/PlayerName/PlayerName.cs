@@ -4,21 +4,20 @@ using TMPro;
 
 public class PlayerName : MonoBehaviour
 {
-
-	public new string name;
-	public TextAsset namesJson;
+	string _name;
 	NameGenerator nameGenerator;
+	[SerializedField] TextAsset namesJson;
 	[SerializeField] TextMeshPro nameText;
 
-	public void Generate ()
+	void GenerateNewName ()
 	{
-		name = nameGenerator.fullName;
+		_name = nameGenerator.fullName;
 	}
 
 	void Awake ()
 	{
 		nameGenerator = new NameGenerator (namesJson);
-		name = nameGenerator.fullName;
-		nameText.text = name;
+		_name = nameGenerator.fullName;
+		nameText.text = _name;
 	}
 }
