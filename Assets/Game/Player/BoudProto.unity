@@ -205,6 +205,7 @@ MonoBehaviour:
   screen: {fileID: 114302923288511792, guid: a4d799eb2c20db845807d84132cfb850, type: 2}
   playerPrefab: {fileID: 114445542192439602, guid: b82e7f5b94386da4b9097435a53863f8,
     type: 2}
+  playerCount: 4
 --- !u!4 &74468803
 Transform:
   m_ObjectHideFlags: 0
