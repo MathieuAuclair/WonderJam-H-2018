@@ -16,13 +16,14 @@ public struct LineSegment
 
 public class Buildings : MonoBehaviour {
 
-	public GameObject BuildingStatic;
+	public List<GameObject> BuildingModels;
 	public GameObject Roads;
 	public GameObject Instances;
+	public float BuildingSpace = 4.5f;
 
 	private ControlRoads control { get; set; }
 
-	public List<Building> BuildingsList {get;private set;}
+	public List<GameObject> BuildingsList {get;private set;}
 
 	private List<RoadSegment> splitList {get;set;}
 	public static bool Splitting = false;
@@ -30,7 +31,7 @@ public class Buildings : MonoBehaviour {
 	void Start () 
 	{
 		this.control = Roads.GetComponent<ControlRoads> ();
-		this.BuildingsList = new List<Building> ();
+		this.BuildingsList = new List<GameObject> ();
 	}
 
     /// <summary>
@@ -55,7 +56,7 @@ public class Buildings : MonoBehaviour {
 			Buildings.Splitting = false;
 
 		this.splitList = new List<RoadSegment> ();
-		this.BuildingsList = new List<Building> ();
+		this.BuildingsList = new List<GameObject> ();
 
 		foreach(Transform child in this.Instances.transform)
 			Destroy(child.gameObject);
@@ -88,7 +89,7 @@ public class Buildings : MonoBehaviour {
 		float distance = Vector2.Distance (start, end);
 
 		bool side = true;
-		for(float f=RoadRenderer._RoadWidth;f<distance || side;f+=4.5f)
+		for(float f=RoadRenderer._RoadWidth;f<distance || side;f+=BuildingSpace)
 		{
 			//switch side of the road
 			if(f > distance && side)
@@ -119,28 +120,28 @@ public class Buildings : MonoBehaviour {
 				if(f - width < 0 || f + width > distance)
 					continue;
 
-				Vector3 center = new Vector3(tc.x,0,tc.y);
-
-				//get building size
-				Vector3 size = new Vector3(length,width,height);
+				Vector3 center = new Vector3(tc.x,-1,tc.y);
 
 				//set building
-				GameObject buildingObj = GameObject.Instantiate(this.BuildingStatic);
+				GameObject selectedModel = this.BuildingModels [Random.Range(0, this.BuildingModels.Count)];
+				//get building size
+				//Vector3 size = new Vector3(selectedModel.transform.localScale.x, selectedModel.transform.localScale.z, selectedModel.transform.localScale.y);
+				GameObject buildingObj = Object.Instantiate(selectedModel, center, Quaternion.AngleAxis(this.GetRotation(dir) - (side ? 180 : 0), Vector3.up));
+				//buildingObj.transform.localScale = Vector3.one;
 				buildingObj.transform.parent = this.Instances.transform;
-				buildingObj.transform.name = "building_" + this.BuildingsList.Count.ToString("D5");
 
-				Building building = new Building(center,size,this.GetRotation(dir) - (side ? 180 : 0));
-				building.AddMyGameObject(buildingObj);
-				this.AddBuildingMesh(building);
-				building.AddCollider();
+				//Building building = new Building(center,size,this.GetRotation(dir) - (side ? 180 : 0));
+				//building.AddMyGameObject(buildingObj);
+				//this.AddBuildingMesh(building);
+				//building.AddCollider();
 
-				if(this.CheckValidPlacement(building))
+				if(this.CheckValidPlacement(buildingObj))
 				{
-					this.BuildingsList.Add(building);
+					this.BuildingsList.Add(buildingObj);
 					break;
 				}
 				else
-					GameObject.DestroyImmediate(buildingObj);
+					Object.DestroyImmediate(buildingObj);
 			}
 		}
 	}
@@ -249,12 +250,6 @@ public class Buildings : MonoBehaviour {
 		mesh.triangles = triangles.ToArray();
 		mesh.uv = uvs.ToArray();
 		mesh.RecalculateNormals ();
-		//mesh.normals = normals.ToArray();
-	}
-
-	private Vector3 RotateAroundPoint(Vector3 point, Vector3 pivot, Quaternion angle){
-		//return angle * ( point - pivot) + pivot;
-		return point;
 	}
 
     /// <summary>
@@ -262,17 +257,17 @@ public class Buildings : MonoBehaviour {
     /// </summary>
     /// <param name="building"></param>
     /// <returns></returns>
-	private bool IntersectsRoad(Building building)
+	private bool IntersectsRoad(GameObject building)
 	{
+		var buildingCollider = building.GetComponentInChildren<MeshCollider> ();
         //can be made more efficient, currently evaluates all roads, check distance if needed
 		foreach (RoadSegment segment in this.control.RoadSegments) {
-			Ray ray = new Ray(segment.GetVector3(true),segment.GetVector3(false) - segment.GetVector3(true));
+			Ray ray1 = new Ray(segment.GetVector3(true),segment.GetVector3(false) - segment.GetVector3(true));
 			RaycastHit hit = new RaycastHit();
 			float distance = Vector2.Distance(segment.PointA.point,segment.PointB.point);
-			building.MyCollider.Raycast(ray,out hit,distance);
-
-			if(building.MyCollider.Raycast(ray,out hit,distance))
+			if (buildingCollider.Raycast (ray1, out hit, distance)) {
 				return true;
+			}
 		}
 
 		return false;
@@ -317,13 +312,14 @@ public class Buildings : MonoBehaviour {
     /// </summary>
     /// <param name="building"></param>
     /// <returns></returns>
-	private bool CheckValidPlacement(Building building)
+	private bool CheckValidPlacement(GameObject building)
 	{
+		var buildingBound = building.GetComponentInChildren<MeshCollider> ().bounds;
         //check this building with all other withing given distance
-		foreach (Building other in this.BuildingsList)
-			if (Vector3.Distance (building.Center, other.Center) > 25f)
+		foreach (GameObject other in this.BuildingsList)
+			if (Vector3.Distance (building.transform.position, other.transform.position) > 25f)
 				continue;
-			else if (building.Intersects (other))
+			else if (buildingBound.Intersects (other.GetComponentInChildren<MeshCollider> ().bounds))
 				return false;
 
 		if (this.IntersectsRoad (building))
@@ -363,7 +359,8 @@ public class Building
 	public void AddCollider()
 	{
 		this.MyCollider = this.MyGameObject.GetComponent<BoxCollider> ();
-		this.MyCollider.size = new Vector3 (this.Size.x * 2 + RoadRenderer._RoadWidth, this.Size.z + 0.75f, this.Size.y * 2 + RoadRenderer._RoadWidth);
+		//this.MyCollider.size = new Vector3 (this.Size.x * 2 + RoadRenderer._RoadWidth, this.Size.z + 0.75f, this.Size.y * 2 + RoadRenderer._RoadWidth);
+		this.MyCollider.size = new Vector3 (this.Size.x, this.Size.z, this.Size.y);
 		this.MyCollider.center = new Vector3 (0, this.Size.z / 2.0f, 0);
 	}
 

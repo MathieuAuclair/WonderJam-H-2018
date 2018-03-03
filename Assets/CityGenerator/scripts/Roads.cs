@@ -24,10 +24,9 @@ public class RoadNetwork
 	public void SplitSegments(int level = 0)
 	{
 		List<RoadSegment> segments = new List<RoadSegment> (this.RoadSegments);
-
 		for(int i=0;i<segments.Count;i++){
 			if(segments[i].Level == level)
-			{	
+			{
 				this.splitSegment (segments[i]);
 			}
 		}
@@ -528,6 +527,8 @@ public class RoadSegment
 {
 	public RoadPoint PointA { get; private set; }
 	public RoadPoint PointB { get; private set; }
+	public float DistancePointA { get; set; }
+	public float DistancePointB { get; set; }
 
 	public int Level { get; private set; }
 

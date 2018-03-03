@@ -12,7 +12,7 @@ public class ControlRoads : MonoBehaviour {
 	public List<RoadSegment> RoadSegments {get; private set;}
 	public List<Intersection> Intersections {get; private set;}
 	public float MapSize = 100f;
-	public float MapAngle = 120f; 
+	public float MapAngle = 120f;
 
 	public Slider GridSlider;
 	public Text GridTypeText;
@@ -74,9 +74,15 @@ public class ControlRoads : MonoBehaviour {
 		
 		this.roadRenderer = this.GetComponent<RoadRenderer> ();
 		this.roadRenderer.ClearData ();
-
-		foreach (RoadSegment segment in this.network.RoadSegments)
-            this.roadRenderer.AddRoadSegments(segment);
+		List<RoadSegment> farSegments = new List<RoadSegment> ();
+		foreach (RoadSegment segment in this.network.RoadSegments) {
+			segment.DistancePointA = Vector3.Distance (Vector3.zero, segment.PointA.point);
+			segment.DistancePointB = Vector3.Distance (Vector3.zero, segment.PointB.point);
+			if (segment.DistancePointA > MapSize || segment.DistancePointB > MapSize) {
+				farSegments.Add (segment);
+			}
+			this.roadRenderer.AddRoadSegments(segment);
+		}
 
 		foreach (Intersection inter in this.network.RoadIntersections)
 			this.roadRenderer.AddIntersection (inter);
