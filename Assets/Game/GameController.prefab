@@ -55,3 +55,4 @@ MonoBehaviour:
   playerPrefab: {fileID: 114794848452364862, guid: 6cc4daa1dea8f1e40b54304eff9f6b45,
     type: 2}
   playerCount: 4
+  startCountdown: {fileID: 0}

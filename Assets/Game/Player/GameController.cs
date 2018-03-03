@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Bonfire.Screen screen;
     [SerializeField] PlayerController playerPrefab;
     [SerializeField] int playerCount = 4;
+    [SerializeField] CountDown startCountdown;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -36,7 +37,6 @@ public class GameController : MonoBehaviour
                 UpdateRegistration();
                 break;
             case Phase.COUNTDOWN:
-                UpdateCountdown();
                 break;
             case Phase.GAME:
                 break;
@@ -57,13 +57,15 @@ public class GameController : MonoBehaviour
             else if (Input.GetButtonDown("StartGame"))
             {
                 currentPhase = Phase.COUNTDOWN;
+                startCountdown.Initiate(3, "DÉTRUISEZ!!!", StartGame);
             }
         }
     }
 
-    void UpdateCountdown()
+    void StartGame()
     {
-        Debug.Log("Counting down");
+        GiveControl();
+        currentPhase = Phase.GAME;
     }
 
     void AddPlayer(int playerId)
