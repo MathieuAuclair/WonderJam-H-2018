@@ -19,13 +19,16 @@ public class MeshSeparator : MonoBehaviour
     private void CreateSlicerBasedOnGameObject(GameObject prop)
     {
         /* TODO calc length with rotation */
-        CreateBladeWithRotation(prop);
+        CreateBladeWithRotation(prop, Quaternion.Euler(90, 0, 0));
+        CreateBladeWithRotation(prop, Quaternion.Euler(0, 90, 0));
+        CreateBladeWithRotation(prop, Quaternion.Euler(0, 0, 90));
     }
 
-    private void CreateBladeWithRotation(GameObject prop){
+    private void CreateBladeWithRotation(GameObject prop, Quaternion rotation)
+    {
         GameObject blade = GameObject.CreatePrimitive(PrimitiveType.Plane);
         blade.GetComponent<Renderer>().enabled = false;
-        blade.transform.localScale = GetPropDimensions(prop);
+        blade.transform.SetPositionAndRotation(GetPropDimensions(prop), rotation);
         blade.transform.position = prop.transform.position;
         blade.AddComponent(typeof(SplitterSingleCut));
         blade.AddComponent(typeof(MeshCollider));
