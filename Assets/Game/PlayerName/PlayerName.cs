@@ -4,10 +4,9 @@ using TMPro;
 
 public class PlayerName : MonoBehaviour
 {
-
-	public string name;
-	public TextAsset namesJson;
+	string name;
 	NameGenerator nameGenerator;
+	[SerializeField] TextAsset namesJson;
 	[SerializeField] TextMeshPro nameText;
 
 	public void Generate ()
