@@ -37,5 +37,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+#IntelliJ
+/.idea/
 
 # End of https://www.gitignore.io/api/unity
