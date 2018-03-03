@@ -3,21 +3,24 @@ using System.Collections.Generic;
 
 public static class PlayerAction
 {
-    public const string CHANGE_HAT = "ChangeHat";
     public const string ROTATE_VIEW = "Camera";
 }
 
 public class PlayerController : InputController
 {
-    const string HORIZONTAL_AXIS = "Horizontal";
-    const string VERTICAL_AXIS = "Vertical";
-    const string TORPEDO_HORIZONTAL_AXIS = "Horizontal_Torpedo";
-    const string TORPEDO_VERTICAL_AXIS = "Vertical_Torpedo";
+    const string AIM_HORIZONTAL = "P{0}AimHorizontal";
+    const string AIM_VERTICAL = "P{0}AimVertical";
+    const string HORIZONTAL_AXIS = "P{0}Horizontal";
+    const string VERTICAL_AXIS = "P{0}Vertical";
+    const string JUMP = "P{0}Jump";
+
+    [SerializeField] int playerId;
 
     IList<string> actions;
     IList<string> axialActions;
     Vector2 move;
     Vector2 aim;
+
 
     PlayerView _view;
 
@@ -31,18 +34,31 @@ public class PlayerController : InputController
         }
     }
 
+    // "im" is short for "inputMapping"
+    IDictionary<string, string> inputMapping;
+
     void Start()
     {
-        actions = new List<string>(6)
+        actions = new List<string>(1)
         {
-            CharacterAction.JUMP,
-            PlayerAction.CHANGE_HAT,
             CharacterAction.JUMP,
         };
 
-        axialActions = new List<string>(1)
-        {
-        };
+        axialActions = new List<string>(0);
+    }
+
+    void MapInputs()
+    {
+        inputMapping = new Dictionary<string, string>(4);
+        Map(HORIZONTAL_AXIS);
+        Map(VERTICAL_AXIS);
+        Map(AIM_HORIZONTAL);
+        Map(AIM_VERTICAL);
+    }
+
+    void Map(string key)
+    {
+        inputMapping.Add(key, string.Format(key, playerId));
     }
 
     public void Update()
@@ -68,11 +84,11 @@ public class PlayerController : InputController
     public void FixedUpdate()
     {
         move.Set(
-            Input.GetAxis(HORIZONTAL_AXIS), 
-            Input.GetAxis(VERTICAL_AXIS));
+            Input.GetAxis(inputMapping[HORIZONTAL_AXIS]), 
+            Input.GetAxis(inputMapping[VERTICAL_AXIS]));
         aim.Set(
-            Input.GetAxis(TORPEDO_HORIZONTAL_AXIS),
-            Input.GetAxis(TORPEDO_VERTICAL_AXIS));
+            Input.GetAxis(inputMapping[AIM_HORIZONTAL]),
+            Input.GetAxis(inputMapping[AIM_VERTICAL]));
         
         BiaxialAction(PlayerAction.ROTATE_VIEW, aim.x, aim.y);
 
