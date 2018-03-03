@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 
-public class ControlRoads : MonoBehaviour {
+public class ControlRoads {
 
 	private RoadNetwork network {get;set;}
-	private RoadRenderer roadRenderer {get;set;}
+	public RoadRenderer roadRenderer {get;set;}
 
 	public List<RoadSegment> RoadSegments {get; private set;}
 	public List<Intersection> Intersections {get; private set;}
@@ -17,31 +17,17 @@ public class ControlRoads : MonoBehaviour {
 	public Slider GridSlider;
 	public Text GridTypeText;
 
-	public Buildings buildings;
-
 	public enum GridType {X_Type, Y_Type, O_Type};
 	private GridType currentType;
 
-	public static bool generatorIdle = false;
-
-	// Use this for initialization
-	void Start () 
-	{
-		this.buildings = this.buildings.GetComponent<Buildings> ();
+	public ControlRoads(){
 		this.currentType = RandomEnumValue<GridType> ();
-		this.GenerateMap ();
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
 	}
 
 	static T RandomEnumValue<T> ()
 	{
 		var v = Enum.GetValues (typeof (T));
-		return (T) v.GetValue (new System.Random ().Next(v.Length));
+		return (T) v.GetValue (UnityEngine.Random.Range(0, v.Length));
 	}
 
 	public void GridTypeClick()
@@ -52,18 +38,13 @@ public class ControlRoads : MonoBehaviour {
 
 	public void GenerateMap()
 	{
-		//if (Buildings.Splitting)
-		//	return;
-		generatorIdle = false;
-		this.buildings.Clear ();
-
 		this.network = new RoadNetwork (this.MapSize);
 		if(this.currentType == GridType.X_Type)
-			this.network.AddCityCentreX (new Vector2(0,0), MapAngle);
+			this.network.AddCityCentreX (Vector2.zero, MapAngle);
 		else if(this.currentType == GridType.Y_Type)
-			this.network.AddCityCentreY (new Vector2(0,0), MapAngle);
+			this.network.AddCityCentreY (Vector2.zero, MapAngle);
 		else if(this.currentType == GridType.O_Type)
-			this.network.AddCityCentreO (new Vector2(0,0), MapAngle);
+			this.network.AddCityCentreO (Vector2.zero, MapAngle);
 
 		this.network.SplitSegments (0);
 		this.network.SplitSegments (0);
@@ -71,8 +52,7 @@ public class ControlRoads : MonoBehaviour {
 		this.network.SplitSegments (1);
 		this.network.SplitSegments (2);
 		this.network.SplitSegments (3);
-		
-		this.roadRenderer = this.GetComponent<RoadRenderer> ();
+
 		this.roadRenderer.ClearData ();
 		List<RoadSegment> farSegments = new List<RoadSegment> ();
 		foreach (RoadSegment segment in this.network.RoadSegments) {
@@ -88,6 +68,5 @@ public class ControlRoads : MonoBehaviour {
 			this.roadRenderer.AddIntersection (inter);
 
 		this.RoadSegments = new List<RoadSegment> (this.network.RoadSegments);
-		generatorIdle = true;
 	}
 }

@@ -14,31 +14,26 @@ public struct LineSegment
     }
 }
 
-public class Buildings : MonoBehaviour {
+public class Buildings {
 
 	public List<GameObject> BuildingModels;
 	public GameObject Roads;
 	public GameObject Instances;
-	public float BuildingSpace = 4.5f;
+ 	public float BuildingSpace = 4.5f;
 
-	private ControlRoads control { get; set; }
+	public ControlRoads control { get; set; }
 
 	public List<GameObject> BuildingsList {get;private set;}
 
 	private List<RoadSegment> splitList {get;set;}
 	public static bool Splitting = false;
 
-	void Start () 
-	{
-		this.control = Roads.GetComponent<ControlRoads> ();
-		this.BuildingsList = new List<GameObject> ();
-	}
-
     /// <summary>
     /// Flips the building generation on
     /// </summary>
 	public void GenerateBuildings()
 	{
+		this.BuildingsList = new List<GameObject> ();
 		//gonna update incrementaly so there is not a long delay to rendering
 		if (Buildings.Splitting || this.control.RoadSegments == null)
 			return;
@@ -59,15 +54,11 @@ public class Buildings : MonoBehaviour {
 		this.BuildingsList = new List<GameObject> ();
 
 		foreach(Transform child in this.Instances.transform)
-			Destroy(child.gameObject);
+			Object.Destroy(child.gameObject);
 	}
 
-	void Update()
+	public void Update()
 	{
-		if (ControlRoads.generatorIdle) {
-			this.GenerateBuildings ();
-			ControlRoads.generatorIdle = false;
-		}
         if (Buildings.Splitting) {
 			this.checkSegment (this.splitList [0]);
 			this.splitList.RemoveAt (0);
@@ -103,30 +94,26 @@ public class Buildings : MonoBehaviour {
 				per *=-1;
 
 			//try to put some building into the spot
-			for(int i=0;i<10;i++)
+			for(int i=0;i<10;i++) 
 			{
-				//get road level adjustment
-				float level = 2.0f - (segment.Level / 3f);//0,0.33,0.66,1
+				//set building
+				GameObject selectedModel = this.BuildingModels [Random.Range(0, this.BuildingModels.Count)];
 
-				//get building dimensions
-				float width = Random.Range(1.75f,2f) * level;
-				float length = Random.Range(1.75f,2f) * level;
-				float height = Random.Range(2.5f,10f) * level;
+				float length = selectedModel.transform.GetChild(0).localScale.x;
+				float width = selectedModel.transform.GetChild(0).localScale.z;
 
 				//get building center
-				Vector2 roadOffset = per.normalized * (RoadRenderer._RoadWidth * 1.25f + length);
+				Vector2 roadOffset = per.normalized * (RoadRenderer._RoadWidth + length);
 				Vector2 tc = start + (dir * f) + roadOffset;
 
 				if(f - width < 0 || f + width > distance)
 					continue;
 
-				Vector3 center = new Vector3(tc.x,-1,tc.y);
+				Vector3 center = new Vector3(tc.x,-0.05f,tc.y);
 
-				//set building
-				GameObject selectedModel = this.BuildingModels [Random.Range(0, this.BuildingModels.Count)];
 				//get building size
 				//Vector3 size = new Vector3(selectedModel.transform.localScale.x, selectedModel.transform.localScale.z, selectedModel.transform.localScale.y);
-				GameObject buildingObj = Object.Instantiate(selectedModel, center, Quaternion.AngleAxis(this.GetRotation(dir) - (side ? 180 : 0), Vector3.up));
+				GameObject buildingObj = Object.Instantiate(selectedModel, center + this.Instances.transform.position, Quaternion.AngleAxis(this.GetRotation(dir) - (side ? 180 : 0), Vector3.up));
 				//buildingObj.transform.localScale = Vector3.one;
 				buildingObj.transform.parent = this.Instances.transform;
 
