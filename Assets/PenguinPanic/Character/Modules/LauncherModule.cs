@@ -21,9 +21,9 @@ public class LauncherModule : CharacterModule
         set { _getProjectile = value; }
     }
 
-    public override void Initialize(Transform parent)
+    public override void Initialize(Transform parent, Animator animator, Rigidbody body)
     {
-        base.Initialize(parent);
+        base.Initialize(parent, animator, body);
         propulsion = new ThresholdAction(0.2f, Begin, End);
     }
 

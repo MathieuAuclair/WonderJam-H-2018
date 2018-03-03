@@ -43,17 +43,6 @@ public class PlayerView : MonoBehaviour
     Rigidbody targetBody;
     float targetHeight;
 
-    void Start()
-    {
-#if UNITY_EDITOR
-        if (target != null)
-        {
-            SetTarget(target);
-            target.GetComponent<PlayerController>().View = this;
-        }
-#endif
-    }
-
     void FixedUpdate()
     {
         Vector3 targetPosition = GetTargetPosition();

@@ -13,6 +13,7 @@ public class CityGenerator : MonoBehaviour {
 	public int NbOfCities = 3;
 	public float RoadWidth;
 	public float Tiling;
+	public float MapSize = 100f;
 
 	public Material RoadMaterial;
 	public Material IntersectionMaterial;
@@ -43,7 +44,8 @@ public class CityGenerator : MonoBehaviour {
 				Intersections = a.transform.GetChild(0).gameObject
 			};
 			var control = new ControlRoads () {
-				roadRenderer = renderer1
+				roadRenderer = renderer1,
+				MapSize = MapSize
 			};
 			buildings_controller.control = control;
 			buildings.Add (buildings_controller);
