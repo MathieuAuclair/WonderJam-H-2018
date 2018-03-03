@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screen: {fileID: 114302923288511792, guid: a4d799eb2c20db845807d84132cfb850, type: 2}
-  playerPrefab: {fileID: 114177291776866256, guid: ecbc2829a40c3364c9474ec9909a8fc5,
+  playerPrefab: {fileID: 114794848452364862, guid: 6cc4daa1dea8f1e40b54304eff9f6b45,
     type: 2}
   playerCount: 4
 --- !u!4 &298735534
@@ -174,7 +174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &740906556
 AudioListener:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 1366380103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
