@@ -8,11 +8,11 @@ public static class PlayerAction
 
 public class PlayerController : InputController
 {
-    const string AIM_HORIZONTAL = "P{0}AimHorizontal";
-    const string AIM_VERTICAL = "P{0}AimVertical";
-    const string HORIZONTAL_AXIS = "P{0}Horizontal";
-    const string VERTICAL_AXIS = "P{0}Vertical";
-    const string JUMP = "P{0}Jump";
+    public const string AIM_HORIZONTAL = "P{0}Horizontal2";
+    public const string AIM_VERTICAL = "P{0}Vertical2";
+    public const string HORIZONTAL_AXIS = "P{0}Horizontal1";
+    public const string VERTICAL_AXIS = "P{0}Vertical1";
+    public const string JUMP = "P{0}Jump";
 
     [SerializeField] int playerId;
 
@@ -39,6 +39,8 @@ public class PlayerController : InputController
 
     void Start()
     {
+        MapInputs();
+
         actions = new List<string>(1)
         {
             CharacterAction.JUMP,
