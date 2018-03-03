@@ -12,8 +12,6 @@ public class MeshSeparator : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.relativeVelocity.magnitude);
-
         if (other.relativeVelocity.magnitude > requiredMagnitudeToBreak)
         {
             IdentifyPropGameObject(other.gameObject);
