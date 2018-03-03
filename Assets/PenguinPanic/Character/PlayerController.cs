@@ -14,15 +14,14 @@ public class PlayerController : InputController
     public const string VERTICAL_AXIS = "P{0}Vertical1";
     public const string JUMP = "P{0}Jump";
 
-    [SerializeField] int playerId;
+    public int PlayerId { get; set; }
 
     IList<string> actions;
     IList<string> axialActions;
     Vector2 move;
     Vector2 aim;
-
-
     PlayerView _view;
+    IDictionary<string, string> inputMapping;
 
     public PlayerView View
     {
@@ -34,15 +33,13 @@ public class PlayerController : InputController
         }
     }
 
-    IDictionary<string, string> inputMapping;
-
     void Start()
     {
         MapInputs();
 
         actions = new List<string>(1)
         {
-            CharacterAction.JUMP,
+            CharacterAction.JETPACK,
         };
 
         axialActions = new List<string>(0);
@@ -55,12 +52,12 @@ public class PlayerController : InputController
         Map(VERTICAL_AXIS);
         Map(AIM_HORIZONTAL);
         Map(AIM_VERTICAL);
-        Map(CharacterAction.JUMP);
+        Map(CharacterAction.JETPACK);
     }
 
     void Map(string key)
     {
-        inputMapping.Add(key, string.Format(key, playerId));
+        inputMapping.Add(key, string.Format(key, PlayerId));
     }
 
     void Update()

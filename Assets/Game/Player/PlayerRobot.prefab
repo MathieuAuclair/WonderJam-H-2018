@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 95483674876219948}
   - component: {fileID: 136502526364139178}
   m_Layer: 8
-  m_Name: Player1
+  m_Name: PlayerRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc13b8a96fff334db9a05f1a8e761d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
 --- !u!114 &114621191281453628
 MonoBehaviour:
   m_ObjectHideFlags: 1

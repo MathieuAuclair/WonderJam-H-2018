@@ -19,14 +19,12 @@ public class Robot : Character
 
         ground.Initialize();
         movement.Ground = ground;
-
-        SetController(GetComponent<InputController>());
     }
 
     protected override void SubscribeToController()
     {
         Controller.Subscribe(CharacterAction.MOVE, Move);
-        Controller.Subscribe(CharacterAction.JUMP, jetpack.Begin, jetpack.End);
+        Controller.Subscribe(CharacterAction.JETPACK, jetpack.Begin, jetpack.End);
     }
 
     void Move(float h, float v)
