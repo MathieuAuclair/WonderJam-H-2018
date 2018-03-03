@@ -11,7 +11,7 @@ namespace MeshSplitting.Examples
     {
 #if UNITY_EDITOR
         [NonSerialized]
-        public bool ShowDebug = false;
+        public bool ShowDebug = true;
 #endif
 
         public float CutPlaneDistance = 1f;

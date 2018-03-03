@@ -5,13 +5,7 @@ namespace MeshSplitting.Demo
     [AddComponentMenu("Player/MouseMotor")]
     public class MouseMotor : MonoBehaviour
     {
-        public enum RotationAxes
-        {
-            MouseXAndY = 0,
-            MouseX = 1,
-            MouseY = 2
-        }
-
+        public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
         public RotationAxes Axes = RotationAxes.MouseXAndY;
         public float SensitivityX = 15f;
         public float SensitivityY = 15f;
@@ -25,7 +19,6 @@ namespace MeshSplitting.Demo
         private float _rotationY = 0f;
 
         private Transform _transform = null;
-
         public new Transform transform
         {
             get
@@ -50,7 +43,6 @@ namespace MeshSplitting.Demo
             if (!Input.GetKey(KeyCode.Space))
             {
                 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-                Debug.Log(mouseDelta.x + " : " + mouseDelta.y);
             }
 
             if (Axes == RotationAxes.MouseXAndY)
