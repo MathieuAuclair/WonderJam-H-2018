@@ -34,7 +34,6 @@ public class PlayerController : InputController
         }
     }
 
-    // "im" is short for "inputMapping"
     IDictionary<string, string> inputMapping;
 
     void Start()
@@ -51,11 +50,12 @@ public class PlayerController : InputController
 
     void MapInputs()
     {
-        inputMapping = new Dictionary<string, string>(4);
+        inputMapping = new Dictionary<string, string>(5);
         Map(HORIZONTAL_AXIS);
         Map(VERTICAL_AXIS);
         Map(AIM_HORIZONTAL);
         Map(AIM_VERTICAL);
+        Map(CharacterAction.JUMP);
     }
 
     void Map(string key)
@@ -63,15 +63,15 @@ public class PlayerController : InputController
         inputMapping.Add(key, string.Format(key, playerId));
     }
 
-    public void Update()
+    void Update()
     {
         foreach (string action in actions)
         {
-            if (Input.GetButtonDown(action))
+            if (Input.GetButtonDown(inputMapping[action]))
             {
                 BeginAction(action);
             }
-            if (Input.GetButtonUp(action))
+            if (Input.GetButtonUp(inputMapping[action]))
             {
                 EndAction(action);
             }
@@ -83,7 +83,7 @@ public class PlayerController : InputController
     }
 
 
-    public void FixedUpdate()
+    void FixedUpdate()
     {
         move.Set(
             Input.GetAxis(inputMapping[HORIZONTAL_AXIS]), 

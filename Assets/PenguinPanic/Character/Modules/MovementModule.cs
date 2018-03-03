@@ -25,9 +25,6 @@ public class MovementModule : CharacterModule
         "considered to be a wall.")]
     [SerializeField][Range(0, 90)] float maximumSlopeAngle;
 
-    [Tooltip(
-        "Wheter the character can, or not, move on ground.")]
-    [SerializeField] bool canWalk = true;
 
     [Tooltip(
         "Used for wall collision detection.")]
@@ -35,6 +32,8 @@ public class MovementModule : CharacterModule
 
     Move input;
     Vector3 facing;
+
+    public bool CanWalk { private get; set; }
 
     public GroundSensor Ground { private get; set; }
 
@@ -60,7 +59,7 @@ public class MovementModule : CharacterModule
 
         Vector3 movement;
 
-        if (canWalk && Ground.IsGrounded)
+        if (CanWalk && Ground.IsGrounded)
         {
             EnableState();
             movement = GetGroundMovement();

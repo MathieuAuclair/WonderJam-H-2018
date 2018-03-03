@@ -3,7 +3,7 @@
 public static class CharacterAction
 {
     public const string MOVE = "Move";
-    public const string JUMP = "Jump";
+    public const string JUMP = "P{0}Jump";
 }
 
 /// <summary>

@@ -4,6 +4,7 @@ public class Robot : Character
 {
     [Header("Modules")]
     [SerializeField] MovementModule movement;
+    [SerializeField] JetPackModule jetpack;
 
     [Header("Sensors")]
     [SerializeField] GroundSensor ground;
@@ -13,6 +14,7 @@ public class Robot : Character
         InitializeModules(new CharacterModule[]
             {
                 movement,
+                jetpack,
             });
 
         ground.Initialize();
@@ -24,6 +26,7 @@ public class Robot : Character
     protected override void SubscribeToController()
     {
         Controller.Subscribe(CharacterAction.MOVE, Move);
+        Controller.Subscribe(CharacterAction.JUMP, jetpack.Begin, jetpack.End);
     }
 
     void Move(float h, float v)
@@ -35,7 +38,13 @@ public class Robot : Character
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        ground.SenseAny();
+        if (ground.SenseAny())
+        {
+            jetpack.Recharge();
+        }
+
+        movement.CanWalk = !jetpack.IsPropeling;
+        jetpack.CanJump = ground.IsGrounded;
     }
 
     void OnDrawGizmos()
