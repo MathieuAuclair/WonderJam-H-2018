@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class PropPickup : MonoBehaviour
 {
+    public float PropPickupDistance = 5.0f;
 
     void FixedUpdate()
     {
         RaycastHit hit;
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.cyan);
 
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 100.0f))
-            print("Found an object - distance: " + hit.distance);
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, PropPickupDistance))
+        {
+
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * PropPickupDistance, Color.green, 0.5f);
     }
 }
