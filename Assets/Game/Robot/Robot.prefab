@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 33638058228964596}
   - component: {fileID: 23462785115620708}
   - component: {fileID: 65011367276583952}
+  - component: {fileID: 114859309819796836}
   m_Layer: 8
   m_Name: R-Leg
   m_TagString: Untagged
@@ -75,6 +76,7 @@ GameObject:
   - component: {fileID: 33382631156547830}
   - component: {fileID: 23253550195031606}
   - component: {fileID: 65145327957367622}
+  - component: {fileID: 114286911677813984}
   m_Layer: 8
   m_Name: L-Leg
   m_TagString: Untagged
@@ -113,6 +115,7 @@ GameObject:
   - component: {fileID: 54313443491651588}
   - component: {fileID: 153205732777692046}
   - component: {fileID: 65490492896287782}
+  - component: {fileID: 114307039640980448}
   m_Layer: 8
   m_Name: L-Arm
   m_TagString: Untagged
@@ -167,6 +170,7 @@ GameObject:
   - component: {fileID: 54854750367622460}
   - component: {fileID: 153278847489945130}
   - component: {fileID: 65481207668903658}
+  - component: {fileID: 114443790424286508}
   m_Layer: 8
   m_Name: R-Arm
   m_TagString: Untagged
@@ -698,6 +702,42 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114286911677813984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350482601973628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940ec01e76f254e999254b4f18123092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredMagnitudeToBreak: 4
+--- !u!114 &114307039640980448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1554895777941776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940ec01e76f254e999254b4f18123092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredMagnitudeToBreak: 4
+--- !u!114 &114443790424286508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952106259231570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940ec01e76f254e999254b4f18123092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredMagnitudeToBreak: 4
 --- !u!114 &114445507606911534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -751,6 +791,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc13b8a96fff334db9a05f1a8e761d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114859309819796836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1193832688044530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940ec01e76f254e999254b4f18123092, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredMagnitudeToBreak: 4
 --- !u!153 &153205732777692046
 ConfigurableJoint:
   m_ObjectHideFlags: 1
@@ -949,7 +1001,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -3.6538327, y: 2.2960796, z: -6.5169687}
+  m_ConnectedAnchor: {x: -0.019387007, y: 0.046079636, z: 0.080970764}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
