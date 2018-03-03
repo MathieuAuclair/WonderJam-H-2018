@@ -6,7 +6,7 @@ public class PlayerName : MonoBehaviour
 {
 	string _name;
 	NameGenerator nameGenerator;
-	[SerializedField] TextAsset namesJson;
+	[SerializeField] TextAsset namesJson;
 	[SerializeField] TextMeshPro nameText;
 
 	void GenerateNewName ()
