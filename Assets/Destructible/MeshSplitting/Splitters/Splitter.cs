@@ -12,7 +12,6 @@ namespace MeshSplitting.Splitters
         protected virtual void Awake()
         {
             _transform = GetComponent<Transform>();
-            GetComponent<Collider>().isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)

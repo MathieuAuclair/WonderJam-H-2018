@@ -39,6 +39,7 @@ namespace MeshSplitting.Splitables
         private void Awake()
         {
             _transform = GetComponent<Transform>();
+            gameObject.GetComponent<Rigidbody>().Sleep();
         }
 
         private void Update()
@@ -184,6 +185,13 @@ namespace MeshSplitting.Splitables
 
             for (int i = 0; i < 2; i++)
             {
+                if (newGOs[i].CompareTag("prop"))
+                {
+                    newGOs[i].tag = "broken-prop";
+                } else if(newGOs[i].CompareTag("broken-prop")){
+                    newGOs[i].tag = "Untagged";
+                }
+
                 UpdateMeshesInChildren(i, newGOs[i]);
 
                 Transform newTransform = newGOs[i].GetComponent<Transform>();
