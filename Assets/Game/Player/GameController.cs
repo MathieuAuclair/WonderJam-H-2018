@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour
 
     void BeginGame()
     {
+        CrackleAudio.SoundController.PlayMusic("main", 0.5f);
         endGameTimer.Initiate(gameTime, EndGame);
         GiveControl();
     }
@@ -94,6 +95,7 @@ public class GameController : MonoBehaviour
 
     void RemoveControl()
     {
+        CrackleAudio.SoundController.PlaySound("shutdown");
         foreach (var player in players.Values)
         {
             player.UnsubscribeEverything();

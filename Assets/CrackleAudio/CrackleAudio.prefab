@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4228167355783166}
   - component: {fileID: 114272560382010386}
+  - component: {fileID: 81476652506929542}
   m_Layer: 0
   m_Name: CrackleAudio
   m_TagString: Untagged
@@ -34,12 +35,19 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1893306096088078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.40151274, y: 0.8590621, z: 8.871697}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &81476652506929542
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1893306096088078}
+  m_Enabled: 1
 --- !u!114 &114272560382010386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,5 +59,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6d8d695f9c8e1479cb7203ecc33a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundGroups: []
-  musics: []
+  soundGroups:
+  - name: robotwalking
+    sounds:
+    - {fileID: 8300000, guid: 6dff1fc0914cd5f42bd5503c57bbecad, type: 3}
+  - name: shutdown
+    sounds:
+    - {fileID: 8300000, guid: e97b1ef1e2e70ae4b9d00c94f5bd7505, type: 3}
+  musics:
+  - name: main
+    sounds:
+    - {fileID: 8300000, guid: 1e1e5ba01a137c04e903d3fdced2dfde, type: 3}
