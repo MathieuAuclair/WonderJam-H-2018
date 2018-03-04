@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FastBoost : RobotActionBase
+[System.Serializable]
+public class FastBoost : CharacterModule
 {
-    public override void ActionBegins()
+    [SerializeField]
+    float speedModifier = 1.6f;
+    public override void FixedUpdate()
     {
-        Rigidbody body = gameObject.GetComponent<Rigidbody>();
-        body.velocity =  body.velocity * 1.5f;
-    }
-
-    public override void ActionEnds()
-    {
-        Rigidbody body = gameObject.GetComponent<Rigidbody>();
-        body.velocity =  body.velocity / 1.5f;
+        OwnBody.velocity *= speedModifier;
     }
 }

@@ -4,6 +4,7 @@ public class Robot : Character
 {
     [Header("Modules")]
     [SerializeField] MovementModule movement;
+    [SerializeField] FastBoost fastBoost;
     [SerializeField] JetPackModule jetpack;
     [SerializeField] TorsoModule torso;
     [SerializeField] LaserModule laser;
@@ -16,6 +17,7 @@ public class Robot : Character
         InitializeModules(new CharacterModule[]
             {
                 movement,
+                fastBoost,
                 jetpack,
                 torso,
                 laser,
