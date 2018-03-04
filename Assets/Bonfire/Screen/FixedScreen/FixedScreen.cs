@@ -22,5 +22,9 @@ namespace Bonfire
         public override void Update()
         {
         }
+
+        public override void CleanUp()
+        {
+        }
     }
 }

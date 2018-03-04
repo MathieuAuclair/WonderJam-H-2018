@@ -13,5 +13,7 @@ namespace Bonfire
         public abstract void Unregister(Transform target);
 
         public abstract void Update();
+
+        public abstract void CleanUp();
     }
 }

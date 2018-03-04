@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     [SerializeField] ColorSwatch[] swatches;
     [SerializeField] Camera periphericView;
     [SerializeField] IntroScreen intro;
+    [SerializeField] GameObject leaderBoard;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -85,6 +86,13 @@ public class GameController : MonoBehaviour
     {
         RemoveControl();
         currentPhase = Phase.END;
+        Invoke("ShowLeaderBoard", 3);
+    }
+
+    void ShowLeaderBoard()
+    {
+        screen.CleanUp();
+        leaderBoard.SetActive(true);
     }
 
     void UpdateEndGame()
