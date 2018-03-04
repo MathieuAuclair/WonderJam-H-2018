@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerController playerPrefab;
     [SerializeField] CountDown startCountdown;
     [SerializeField] Timer endGameTimer;
+    [SerializeField] ColorSwatch[] swatches;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -83,6 +84,7 @@ public class GameController : MonoBehaviour
         player.PlayerId = playerId;
         screen.Register(player.GetComponentInChildren<Character>().transform);
         players.Add(playerId, player);
+        player.GetComponent<Painter>().ApplySwatch(swatches[playerId - 1]);
     }
 
     void GiveControl()

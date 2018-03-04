@@ -23,26 +23,34 @@ public class ColorSwatch : ScriptableObject
     {
         swatch = new Dictionary<Part, Material>(4)
         {
-            { Part.LIMB, limb },
-            { Part.JOINT, joint },
             { Part.BODY, body },
             { Part.GLASS, glass },
+            { Part.LIMB, limb },
+            { Part.JOINT, joint },
         };
     }
 
-    public void PaintPart(MeshRenderer part, Part color)
+    public void PaintLimbs(MeshRenderer[] limbs)
     {
-        part.material = swatch[color];
+        foreach (var l in limbs)
+        {
+            l.material = swatch[Part.LIMB];
+        }
+    }
+
+    public void PaintHips(MeshRenderer hips)
+    {
+        hips.material = swatch[Part.JOINT];
     }
 
     public void PaintBody(MeshRenderer mainBody)
     {
         mainBody.materials = new Material[]
         {
-            body,
-            glass,
             limb,
-            joint
+            body,
+            joint,
+            glass,
         };
     }
 }
