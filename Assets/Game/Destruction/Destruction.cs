@@ -3,41 +3,41 @@ using UnityEngine;
 
 public class Destruction : MonoBehaviour
 {
-    [Space(7)]
-    [Header("State")]
-    [Space(2)]
-    [Tooltip("Whether the object starts broken")]
-    public bool startBroken;
+	[Space (7)]
+	[Header ("State")]
+	[Space (2)]
+	[Tooltip ("Whether the object starts broken")]
+	public bool startBroken;
 
-    [Space(7)]
-    [Header("Explode on Collision")]
-    [Space(2)]
-    [Tooltip("Whether the object Explodes when it collides with something")]
-    public bool explodeOnCollision = true;
-    [Tooltip("The minimum relative velocity to Explode the object")]
-    public float velocityToExplode = 1;
+	[Space (7)]
+	[Header ("Explode on Collision")]
+	[Space (2)]
+	[Tooltip ("Whether the object Explodes when it collides with something")]
+	public bool explodeOnCollision = true;
+	[Tooltip ("The minimum relative velocity to Explode the object")]
+	public float velocityToExplode = 1;
 
-    [Space(7)]
-    [Header("Explode when nothing underneath")]
-    [Space(2)]
-    [Tooltip("Whether the object Explodes when there's nothing underneath supporting it")]
-    public bool explodeOnNoSupports = false;
-    [Tooltip("The length of the raycast used to check for supports underneath")]
-    public float raycastLength = 1f;
+	[Space (7)]
+	[Header ("Explode when nothing underneath")]
+	[Space (2)]
+	[Tooltip ("Whether the object Explodes when there's nothing underneath supporting it")]
+	public bool explodeOnNoSupports = false;
+	[Tooltip ("The length of the raycast used to check for supports underneath")]
+	public float raycastLength = 1f;
 
-    [Space(7)]
-    [Header("Sound On Explode")]
-    [Space(2)]
-    [Tooltip("Whether the object makes a sound when it Explodes")]
-    public bool soundOnExplode = false;
-    [Tooltip("An array of sounds for the object to make when it Explodes (A random one will be selected)")]
-    public AudioClip[] clips;
+	[Space (7)]
+	[Header ("Sound On Explode")]
+	[Space (2)]
+	[Tooltip ("Whether the object makes a sound when it Explodes")]
+	public bool soundOnExplode = false;
+	[Tooltip ("An array of sounds for the object to make when it Explodes (A random one will be selected)")]
+	public AudioClip[] clips;
 
-    [Space(7)]
-    [Header("Particles On Explode")]
-    [Space(2)]
-    [Tooltip("Whether the object makes particles when it Explodes")]
-    public bool particlesOnExplode = false;
+	[Space (7)]
+	[Header ("Particles On Explode")]
+	[Space (2)]
+	[Tooltip ("Whether the object makes particles when it Explodes")]
+	public bool particlesOnExplode = false;
 
         [Space(7)]
     [Header("Prop Life Span")]
@@ -54,20 +54,20 @@ public class Destruction : MonoBehaviour
 
     [SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
 
-    AudioSource src;
-    ParticleSystem particles;
+	AudioSource src;
+	ParticleSystem particles;
 
-    Collider coll;
-    Rigidbody[] rigids;
-    MeshRenderer[] renderers;
+	Collider coll;
+	Rigidbody[] rigids;
+	MeshRenderer[] renderers;
 
-    void Start()
-    {
-        renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
-        rigids = gameObject.GetComponentsInChildren<Rigidbody>();
-        SetRenderersEnabled(false);
-        coll = GetComponent<Collider>();
-        SetPiecesKinematic(!startBroken);
+	void Start ()
+	{
+		renderers = gameObject.GetComponentsInChildren<MeshRenderer> ();
+		rigids = gameObject.GetComponentsInChildren<Rigidbody> ();
+		SetRenderersEnabled (false);
+		coll = GetComponent<Collider> ();
+		SetPiecesKinematic (!startBroken);
 
         if (soundOnExplode)
         {
@@ -87,15 +87,14 @@ public class Destruction : MonoBehaviour
         }
     }
 
-    void SetupSound()
-    {
-        src = GetComponent<AudioSource>();
-        if (src == null)
-        {
-            src = gameObject.AddComponent<AudioSource>();
-        }
-        src.clip = clips[Random.Range(0, clips.Length - 1)];
-    }
+	void SetupSound ()
+	{
+		//src = GetComponent<AudioSource> ();
+		//if (src == null) {
+		//	src = gameObject.AddComponent<AudioSource> ();
+		//}
+		//src.clip = clips [Random.Range (0, clips.Length - 1)];
+	}
 
     void SetupParticles()
     {
@@ -118,17 +117,21 @@ public class Destruction : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag(TAG_ALLOWED_TO_EXPLODE_THINGS) && explodeOnCollision)
-        {
-            if (collision.relativeVelocity.magnitude > velocityToExplode)
-            {
-                ExplodeEverything();
-                ScoreBoard.IncreaseScore(collision.gameObject.tag, 1);
-            }
-        }
-    }
+	void OnCollisionEnter (Collision collision)
+	{
+		if (collision.transform.CompareTag (TAG_ALLOWED_TO_EXPLODE_THINGS) && explodeOnCollision) {
+			if (collision.relativeVelocity.magnitude > velocityToExplode) {
+				ExplodeEverything ();
+                CrackleAudio.SoundController.PlaySound("destruction");
+                int scream = Random.Range(0, 4);
+                if (scream == 1)
+                {
+                    CrackleAudio.SoundController.PlaySound("scream");
+                }
+				ScoreBoard.IncreaseScore (collision.gameObject.tag, 1);
+			}
+		}
+	}
 
     public void ExplodeEverything()
     {
