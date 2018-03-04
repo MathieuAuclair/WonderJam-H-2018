@@ -99,11 +99,8 @@ public class GameController : MonoBehaviour
     void UpdateEndGame()
     {
         if (Input.GetButtonDown("StartGame"))
-        {
-			foreach (int playerId in ScoreBoard.GetScores().Keys)
-			{
-				ScoreBoard.Reset ();
-			}
+		{
+			ScoreBoard.Reset ();
             SceneManager.LoadScene(0);
         }
     }
