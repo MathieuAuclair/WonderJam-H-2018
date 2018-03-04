@@ -59,7 +59,9 @@ namespace Bonfire
             dynamicRectGrid.Update();
             foreach (var view in mappedViews.Values)
             {
-                view.camera.rect = dynamicRectGrid.GetRectAt(view.quadrant);
+				if (view.camera != null) {
+					view.camera.rect = dynamicRectGrid.GetRectAt(view.quadrant);
+				}
             }
         }
 
@@ -109,7 +111,7 @@ namespace Bonfire
         {
             foreach (var view in mappedViews.Values)
             {
-                Destroy(view.camera);
+				Destroy(view.camera.transform.parent.gameObject);
             }
         }
     }

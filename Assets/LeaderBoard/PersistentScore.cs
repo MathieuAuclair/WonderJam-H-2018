@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PersistentScore : MonoBehaviour
 {
@@ -9,22 +11,33 @@ public class PersistentScore : MonoBehaviour
 
     void Start()
     {
-        output = PlayerPrefs.GetString("Score");
+		var json = PlayerPrefs.GetString ("ScoreJson1");
+		var a = JsonUtility.FromJson<PlayerScores> (json != "" ? json : "{}");
 
         displayUiText = gameObject.GetComponent<Text>();
- 
-        foreach (int playerId in ScoreBoard.GetScores().Keys)
-        {
-            output += playerId + " - " + ScoreBoard.GetScores()[playerId] + "M$\n";
-        }
+		foreach (int playerId in ScoreBoard.GetScores().Keys)
+		{
+			a.Scores.Add (new PlayerScore (){ Name = ScoreBoard.GetName(playerId), Score = ScoreBoard.GetScore(playerId) });
+		}
+		a.Scores.GroupBy(z => z.Name).Select(y => y.First()).OrderByDescending (x => x.Score);
+		foreach (PlayerScore player in a.Scores)
+		{
+			output += player.Name + " - " + player.Score + "M$\n";
+		}
 
         displayUiText.text = output;
-        PlayerPrefs.SetString("Score", output);
+		PlayerPrefs.SetString("ScoreJson1", JsonUtility.ToJson(a));
     }
 }
 
+[System.Serializable]
 public class PlayerScore
 {
     public string Name;
-    public int Score;
+    public float Score;
+}
+[System.Serializable]
+public class PlayerScores
+{
+	public List<PlayerScore> Scores;
 }

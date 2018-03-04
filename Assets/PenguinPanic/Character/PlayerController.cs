@@ -35,7 +35,11 @@ public class PlayerController : InputController
 	}
 
 	public string PlayerName {
-		get { return GetComponent<PlayerName> ().GetName(); }
+		get { 
+			var j = GetComponent<PlayerName> ().GetName ();
+			ScoreBoard.SetName (PlayerId, j);
+			return j; 
+		}
 	}
 
 	public PlayerView View {

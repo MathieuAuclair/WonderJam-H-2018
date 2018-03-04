@@ -2,8 +2,9 @@
 
 public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 {
-    readonly IDictionary<int, int> scores = new Dictionary<int, int>();
-    int maxScoreKey = -1;
+	readonly IDictionary<int, int> scores = new Dictionary<int, int>();
+	readonly IDictionary<int, string> nameMapping = new Dictionary<int, string>();
+    int maxScorePlayerId = -1;
 
     public static IDictionary<int, int> GetScores()
     {
@@ -13,7 +14,7 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
     IDictionary<int, int> _GetScores()
     {
         return scores;
-    }
+	}
 
     public static void Reset()
     {
@@ -41,9 +42,9 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
             scores[playerKey] = gain;
         }
 
-        if (!scores.ContainsKey(maxScoreKey) || scores[playerKey] > scores[maxScoreKey])
+        if (!scores.ContainsKey(maxScorePlayerId) || scores[playerKey] > scores[maxScorePlayerId])
         {
-            maxScoreKey = playerKey;
+            maxScorePlayerId = playerKey;
         }
     }
 
@@ -54,7 +55,7 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 
     int _GetLeading()
     {
-        return maxScoreKey;
+		return maxScorePlayerId;
     }
 
     public static int GetScore(int playerId)
@@ -69,7 +70,31 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
             scores[playerId] = 0;
         }
         return scores[playerId];
-    }
+	}
+
+	public static string GetName(int playerId)
+	{
+		return Instance._GetName(playerId);
+	}
+
+	string _GetName(int playerId)
+	{
+		if (!nameMapping.ContainsKey(playerId))
+		{
+			nameMapping[playerId] = "";
+		}
+		return nameMapping[playerId];
+	}
+
+	public static void SetName(int playerId, string name)
+	{
+		Instance._SetName(playerId, name);
+	}
+
+	void _SetName(int playerId, string _name)
+	{
+		nameMapping [playerId] = _name;
+	}
 
     public static KeyValuePair<int, int> GetLeadingWithScore()
     {
@@ -78,6 +103,6 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 
     KeyValuePair<int, int> _GetLeadingWithScore()
     {
-        return new KeyValuePair<int, int>(maxScoreKey, scores[maxScoreKey]);
+        return new KeyValuePair<int, int>(maxScorePlayerId, scores[maxScorePlayerId]);
     }
 }
