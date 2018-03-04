@@ -12,10 +12,10 @@ public class ColorSwatch : ScriptableObject
         GLASS,
     }
 
-    [SerializeField] Material limb;
-    [SerializeField] Material joint;
     [SerializeField] Material body;
     [SerializeField] Material glass;
+    [SerializeField] Material limb;
+    [SerializeField] Material joint;
 
     IDictionary<Part, Material> swatch;
 
@@ -30,8 +30,19 @@ public class ColorSwatch : ScriptableObject
         };
     }
 
-    public void Paint(MeshRenderer part, Part color)
+    public void PaintPart(MeshRenderer part, Part color)
     {
         part.material = swatch[color];
+    }
+
+    public void PaintBody(MeshRenderer mainBody)
+    {
+        mainBody.materials = new Material[]
+        {
+            body,
+            glass,
+            limb,
+            joint
+        };
     }
 }
