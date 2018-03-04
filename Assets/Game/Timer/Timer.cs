@@ -6,7 +6,6 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] Text display;
 
-    string endMessage;
     float timeLeft;
     bool running;
     Action onEnd;
@@ -16,9 +15,8 @@ public class Timer : MonoBehaviour
         GetComponent<Text>().text = string.Empty;
     }
 
-    public void Initiate(int duration, string endMessage, Action onEnd = null)
+    public void Initiate(int duration, Action onEnd = null)
     {
-        this.endMessage = endMessage;
         timeLeft = duration;
         running = true;
         this.onEnd = onEnd ?? delegate

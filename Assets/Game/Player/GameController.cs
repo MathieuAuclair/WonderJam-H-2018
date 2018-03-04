@@ -66,7 +66,7 @@ public class GameController : MonoBehaviour
 
     void BeginGame()
     {
-        endGameTimer.Initiate(gameTime, "", EndGame);
+        endGameTimer.Initiate(gameTime, EndGame);
         GiveControl();
     }
 
