@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Destruction : MonoBehaviour
@@ -37,7 +38,7 @@ public class Destruction : MonoBehaviour
 	[Header ("Particles On Explode")]
 	[Space (2)]
 	[Tooltip ("Whether the object makes particles when it Explodes")]
-	public bool particlesOnExplode = false;
+	public bool particlesOnExplode = true;
 
 	[Space (7)]
 	[Header ("Prop Life Span")]
@@ -53,17 +54,19 @@ public class Destruction : MonoBehaviour
 
 
 	[SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
-	[SerializeField] GameObject hitParticle;
+	[SerializeField] public string particlePoolName = "HitPool";
 
 	AudioSource src;
-	ParticleSystem particles;
 
 	Collider coll;
 	Rigidbody[] rigids;
 	MeshRenderer[] renderers;
+	List<Transform> currentlyPlayingParticles;
+	GameObjectPool _pool;
 
 	void Start ()
 	{
+		_pool = GameObjectPool.GetPool (particlePoolName);
 		renderers = gameObject.GetComponentsInChildren<MeshRenderer> ();
 		rigids = gameObject.GetComponentsInChildren<Rigidbody> ();
 		SetRenderersEnabled (false);
@@ -73,9 +76,10 @@ public class Destruction : MonoBehaviour
 		if (soundOnExplode) {
 			SetupSound ();
 		}
-		if (particlesOnExplode) {
-			SetupParticles ();
-		}
+	}
+
+	void Awake(){
+		currentlyPlayingParticles = new List<Transform> ();
 	}
 
 	void SetRenderersEnabled (bool value)
@@ -94,15 +98,6 @@ public class Destruction : MonoBehaviour
 		//src.clip = clips [Random.Range (0, clips.Length - 1)];
 	}
 
-	void SetupParticles ()
-	{
-		particles = GetComponent<ParticleSystem> ();
-		if (particles == null) {
-			particles = gameObject.AddComponent<ParticleSystem> ();
-		}
-		particles.Stop ();
-	}
-
 	void CheckDownwardsForSupports ()
 	{
 		if (explodeOnNoSupports) {
@@ -112,13 +107,30 @@ public class Destruction : MonoBehaviour
 		}
 	}
 
+	void Update(){
+		List<Transform> toDelete = new List<Transform> ();
+		foreach (var effect in currentlyPlayingParticles) {
+			if (!effect.GetComponentInChildren<ParticleSystem> ().IsAlive (true)) {
+				toDelete.Add (effect);
+				_pool.ReleaseInstance (effect);
+			}
+		}
+		foreach (var effectToDelete in toDelete) {
+			currentlyPlayingParticles.Remove (effectToDelete);
+		}
+	}
+
 	void OnCollisionEnter (Collision collision)
 	{
 		if (collision.transform.CompareTag (TAG_ALLOWED_TO_EXPLODE_THINGS) && explodeOnCollision) {
 			if (collision.relativeVelocity.magnitude > velocityToExplode) {
 				ExplodeEverything ();
 				CrackleAudio.SoundController.PlaySound ("destruction");
-				Instantiate (hitParticle, collision.transform.position, Quaternion.identity);
+				var a = _pool.GetInstance (collision.transform.position);
+				a.GetComponentInChildren<ParticleSystem> ().Play ();
+				currentlyPlayingParticles.Add (a);
+				if (particlesOnExplode) {
+				}
 				int scream = Random.Range (0, 4);
 				if (scream == 1) {
 					CrackleAudio.SoundController.PlaySound ("scream");
@@ -140,9 +152,6 @@ public class Destruction : MonoBehaviour
 		renderers [0].gameObject.SetActive (false);
 		if (soundOnExplode) {
 			src.Play ();
-		}
-		if (particlesOnExplode) {
-			particles.Play ();
 		}
 	}
 

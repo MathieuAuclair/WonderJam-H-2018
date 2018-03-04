@@ -1797,5 +1797,4 @@ MonoBehaviour:
   particlesOnExplode: 0
   propLifeSpan: 5
   isPropDestroyedAfterLifeSpan: 0
-  hitParticle: {fileID: 1252412786230152, guid: 7777eed54d147834c9e870397285ae26,
-    type: 2}
+  particlePoolName: HitPool
