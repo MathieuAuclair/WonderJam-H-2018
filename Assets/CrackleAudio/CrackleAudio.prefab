@@ -81,6 +81,12 @@ MonoBehaviour:
   - name: go
     sounds:
     - {fileID: 8300000, guid: ca3343be8073f1146bd63a84ba21902c, type: 3}
+  - name: laser
+    sounds:
+    - {fileID: 8300000, guid: 156e45af2056856438267dcdb5d26b36, type: 3}
+  - name: powerup
+    sounds:
+    - {fileID: 8300000, guid: da393fcb9a8325947ab83024ad196ab8, type: 3}
   musics:
   - name: main
     sounds:
