@@ -6,8 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Robot/ProtoAnim.unity
-    guid: 9388c216db30cf14785c9e5ea98f4d49
-  - enabled: 1
-    path: Assets/Game/Player/BoudProto.unity
-    guid: 89ad63ef63472d042858700460e28aff
+    path: Assets/Game/main.unity
+    guid: aee6ec81cdcf843b095b65f449923220
