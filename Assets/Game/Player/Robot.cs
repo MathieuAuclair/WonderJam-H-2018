@@ -23,6 +23,11 @@ public class Robot : Character
         movement.Ground = ground;
     }
 
+    public void ShutDown()
+    {
+        movement.IsEnabled = false;
+    }
+
     protected override void SubscribeToController()
     {
         Controller.Subscribe(CharacterAction.MOVE, Move);
