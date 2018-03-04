@@ -9,7 +9,7 @@ public class TorsoModule : CharacterModule
     public void Rotate(float h, float v)
     {
         Vector3 targetDirection = new Vector3(h, 0, v);
-        torso.AddForceAtPosition(targetDirection * power, torso.transform.forward * power + torso.position);
-        //torso.transform.LookAt(targetDirection + torso.position);
+        //torso.AddForceAtPosition(targetDirection * power, torso.transform.forward * power + torso.position);
+        torso.transform.LookAt(targetDirection + torso.position);
     }
 }
