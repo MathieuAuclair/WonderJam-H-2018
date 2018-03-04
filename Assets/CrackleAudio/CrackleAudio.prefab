@@ -66,6 +66,16 @@ MonoBehaviour:
   - name: shutdown
     sounds:
     - {fileID: 8300000, guid: e97b1ef1e2e70ae4b9d00c94f5bd7505, type: 3}
+  - name: destruction
+    sounds:
+    - {fileID: 8300000, guid: 3ea9273765faecb448b16b64115e88d0, type: 3}
+    - {fileID: 8300000, guid: 0c2b1600bff6720499394247893d5a24, type: 3}
+    - {fileID: 8300000, guid: cc678d8ec9012b24392790981fcfa5ea, type: 3}
+    - {fileID: 8300000, guid: 8882c51302c2a2f4db2fefd743d77618, type: 3}
+  - name: scream
+    sounds:
+    - {fileID: 8300000, guid: e6e9eb511469a3e47b5221ed38c0a373, type: 3}
+    - {fileID: 8300000, guid: 9cdc8592923f65a45a7d88896f334cdb, type: 3}
   musics:
   - name: main
     sounds:

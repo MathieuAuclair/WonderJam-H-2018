@@ -72,11 +72,11 @@ public class Destruction : MonoBehaviour
 
 	void SetupSound ()
 	{
-		src = GetComponent<AudioSource> ();
-		if (src == null) {
-			src = gameObject.AddComponent<AudioSource> ();
-		}
-		src.clip = clips [Random.Range (0, clips.Length - 1)];
+		//src = GetComponent<AudioSource> ();
+		//if (src == null) {
+		//	src = gameObject.AddComponent<AudioSource> ();
+		//}
+		//src.clip = clips [Random.Range (0, clips.Length - 1)];
 	}
 
 	void SetupParticles ()
@@ -102,6 +102,12 @@ public class Destruction : MonoBehaviour
 		if (collision.transform.CompareTag (TAG_ALLOWED_TO_EXPLODE_THINGS) && explodeOnCollision) {
 			if (collision.relativeVelocity.magnitude > velocityToExplode) {
 				ExplodeEverything ();
+                CrackleAudio.SoundController.PlaySound("destruction");
+                int scream = Random.Range(0, 4);
+                if (scream == 1)
+                {
+                    CrackleAudio.SoundController.PlaySound("scream");
+                }
 				ScoreBoard.IncreaseScore (collision.gameObject.tag, 1);
 			}
 		}
