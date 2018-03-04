@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOutput : MonoBehaviour
+public class PersistentScore : MonoBehaviour
 {
 	Text displayUiText;
 
