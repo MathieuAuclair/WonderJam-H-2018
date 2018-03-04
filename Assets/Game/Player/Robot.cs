@@ -50,6 +50,7 @@ public class Robot : Character
 
     public void ActivatePowerUp(PowerUpPicker.Power power, GameObject other)
     {
+        CrackleAudio.SoundController.PlaySound("powerup");
         Destroy(other);
         if (!powerUps[power].IsEnabled)
             powerUps[power].IsEnabled = true;

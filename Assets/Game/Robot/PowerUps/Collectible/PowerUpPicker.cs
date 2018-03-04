@@ -18,7 +18,6 @@ public class PowerUpPicker : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        CrackleAudio.SoundController.PlaySound("powerup");
         switch (other.transform.tag)
         {
             case "powerUpLazer":
