@@ -161,9 +161,9 @@ public class Destruction : MonoBehaviour
             particles.Play();
         }
 
-		if (gameObject.tag == "dome")
+        if (gameObject.tag == "dome")
         {
-            int index = Random.Range(0, (powerUps.Count - 1));
+            int index = Random.Range(0, (powerUps.Count));
             GameObject usedPowerUp = powerUps[index];
             Instantiate(usedPowerUp, (transform.position + new Vector3(0, 2, 0)), Quaternion.identity);
         }
