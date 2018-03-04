@@ -56,34 +56,30 @@ public class Destruction : MonoBehaviour
     [Header("Prefab powerup")]
     public List<GameObject> powerUps;
 
-    [SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
-    [SerializeField] GameObject hitParticle;
+	[SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
+	[SerializeField] public string particlePoolName = "HitPool";
 
     AudioSource src;
-    ParticleSystem particles;
 
     Collider coll;
     Rigidbody[] rigids;
-    MeshRenderer[] renderers;
-
+	MeshRenderer[] renderers;
+	List<Transform> currentlyPlayingParticles;
+	GameObjectPool _pool;
 
     void Start()
-    {
+	{
+		_pool = GameObjectPool.GetPool (particlePoolName);
         renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
         rigids = gameObject.GetComponentsInChildren<Rigidbody>();
         SetRenderersEnabled(false);
         coll = GetComponent<Collider>();
         SetPiecesKinematic(!startBroken);
-
-        if (soundOnExplode)
-        {
-            SetupSound();
-        }
-        if (particlesOnExplode)
-        {
-            SetupParticles();
-        }
     }
+
+	void Awake(){
+		currentlyPlayingParticles = new List<Transform> ();
+	}
 
     void SetRenderersEnabled(bool value)
     {
@@ -93,35 +89,18 @@ public class Destruction : MonoBehaviour
         }
     }
 
-    void SetupSound()
-    {
-        //src = GetComponent<AudioSource> ();
-        //if (src == null) {
-        //	src = gameObject.AddComponent<AudioSource> ();
-        //}
-        //src.clip = clips [Random.Range (0, clips.Length - 1)];
-    }
-
-    void SetupParticles()
-    {
-        particles = GetComponent<ParticleSystem>();
-        if (particles == null)
-        {
-            particles = gameObject.AddComponent<ParticleSystem>();
-        }
-        particles.Stop();
-    }
-
-    void CheckDownwardsForSupports()
-    {
-        if (explodeOnNoSupports)
-        {
-            if (!Physics.Raycast(transform.position, Vector3.down, raycastLength))
-            {
-                ExplodeEverything();
-            }
-        }
-    }
+	void Update(){
+		List<Transform> toDelete = new List<Transform> ();
+		foreach (var effect in currentlyPlayingParticles) {
+			if (!effect.GetComponentInChildren<ParticleSystem> ().IsAlive (true)) {
+				toDelete.Add (effect);
+				_pool.ReleaseInstance (effect);
+			}
+		}
+		foreach (var effectToDelete in toDelete) {
+			currentlyPlayingParticles.Remove (effectToDelete);
+		}
+	}
 
     void OnCollisionEnter(Collision collision)
     {
@@ -130,22 +109,24 @@ public class Destruction : MonoBehaviour
             if (collision.relativeVelocity.magnitude > velocityToExplode)
             {
                 ExplodeEverything();
-                CrackleAudio.SoundController.PlaySound("destruction");
-                Instantiate(hitParticle, collision.transform.position, Quaternion.identity);
+				CrackleAudio.SoundController.PlaySound("destruction");
+				var a = _pool.GetInstance (collision.transform.position);
+				a.GetComponentInChildren<ParticleSystem> ().Play ();
+				currentlyPlayingParticles.Add (a);
                 int scream = Random.Range(0, 4);
                 if (scream == 1)
                 {
                     CrackleAudio.SoundController.PlaySound("scream");
                 }
-                UpdateScore(collision);
+				UpdateScore (collision, UnityEngine.Random.Range(1f, GetComponent<Destruction>().velocityToExplode));
             }
         }
-    }
+	}
 
-    static void UpdateScore(Collision collision)
-    {
-        ScoreBoard.IncreaseScore(collision.gameObject.GetComponentInParent<PlayerController>().PlayerId, 1);
-    }
+	static void UpdateScore (Collision collision, float amount)
+	{
+		ScoreBoard.IncreaseScore (collision.gameObject.GetComponentInParent<PlayerController> ().PlayerId, amount);
+	}
 
     public void ExplodeEverything()
     {
@@ -155,10 +136,6 @@ public class Destruction : MonoBehaviour
         if (soundOnExplode)
         {
             src.Play();
-        }
-        if (particlesOnExplode)
-        {
-            particles.Play();
         }
 
         if (gameObject.tag == "dome")
