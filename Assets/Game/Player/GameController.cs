@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour
     [SerializeField] CountDown startCountdown;
     [SerializeField] Timer endGameTimer;
     [SerializeField] ColorSwatch[] swatches;
+    [SerializeField] Camera periphericView;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -29,19 +31,22 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        screen = Instantiate(screen);
         screen.Initialize();
     }
 
     void Update()
     {
         screen.Update();
-
         switch (currentPhase)
         {
             case Phase.REGISTRATION:
                 UpdateRegistration();
                 break;
             case Phase.GAME:
+                break;
+            case Phase.END:
+                UpdateEndGame();
                 break;
         }
     }
@@ -55,6 +60,7 @@ public class GameController : MonoBehaviour
                 if (Input.GetButtonDown(string.Format(JOIN, i)))
                 {
                     AddPlayer(i);
+                    periphericView.enabled = false;
                 }
             }
             else if (Input.GetButtonDown("StartGame"))
@@ -76,6 +82,14 @@ public class GameController : MonoBehaviour
     {
         RemoveControl();
         currentPhase = Phase.END;
+    }
+
+    void UpdateEndGame()
+    {
+        if (Input.GetButtonDown("StartGame"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void AddPlayer(int playerId)
