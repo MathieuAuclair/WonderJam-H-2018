@@ -5,10 +5,8 @@ public class Destruction : MonoBehaviour
 	[Space (7)]
 	[Header ("State")]
 	[Space (2)]
-	[Tooltip ("Whether the object is unbroken")]
-	public bool together = true;
 	[Tooltip ("Whether the object starts broken")]
-	public bool startBroken = false;
+	public bool startBroken;
 
 	[Space (7)]
 	[Header ("General Settings")]
@@ -25,7 +23,6 @@ public class Destruction : MonoBehaviour
 	public bool breakOnCollision = true;
 	[Tooltip ("The minimum relative velocity to break the object")]
 	public float velocityToBreak = 1;
-	// Velocity required to break object
 
 	[Space (7)]
 	[Header ("Breaking when nothing underneath")]
@@ -49,31 +46,22 @@ public class Destruction : MonoBehaviour
 	[Tooltip ("Whether the object makes particles when it breaks")]
 	public bool particlesOnBreak = false;
 
-	[SerializeField] string collisionTag = "Player";
+	[SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
 
-	//Private vars
 	AudioSource src;
-	ParticleSystem psys;
+	ParticleSystem particles;
 
-	Vector3 spherePoint = Vector3.zero;
-	float sphereRadius = 0f;
-
-	Rigidbody _rigidbody;
 	Collider coll;
 	Rigidbody[] rigids;
 	MeshRenderer[] renderers;
 
 	void Start ()
 	{
-		//Get the rigidbodies
 		renderers = gameObject.GetComponentsInChildren<MeshRenderer> ();
 		rigids = gameObject.GetComponentsInChildren<Rigidbody> ();
 		SetRenderersEnabled (false);
 		coll = GetComponent<Collider> ();
-		_rigidbody = GetComponent<Rigidbody> ();
-
-		together = !startBroken;
-		SetPiecesKinematic (together);
+		SetPiecesKinematic (!startBroken);
 
 		if (soundOnBreak) {
 			SetupSound ();
@@ -92,102 +80,56 @@ public class Destruction : MonoBehaviour
 
 	void SetupSound ()
 	{
-		//Get the audio source or create one
 		src = GetComponent<AudioSource> ();
 		if (src == null) {
 			src = gameObject.AddComponent<AudioSource> ();
 		}
-
-		//Add a random audio clip to it
 		src.clip = clips [Random.Range (0, clips.Length - 1)];
 	}
 
 	void SetupParticles ()
 	{
-		// Get the particle system or create one
-		psys = GetComponent<ParticleSystem> ();
-		if (psys == null) {
-			psys = gameObject.AddComponent<ParticleSystem> ();
+		particles = GetComponent<ParticleSystem> ();
+		if (particles == null) {
+			particles = gameObject.AddComponent<ParticleSystem> ();
 		}
-
-		//This doesn't seem to do anything b/c the gameobject is not active
-		psys.Stop ();
+		particles.Stop ();
 	}
 
 	void Update ()
 	{
-		/* Broken object should follow unbroken one to prevent them from
-         * being in the wrong place when they switch */
-		//brokenObj.transform.position = togetherObj.transform.position;
-
-		//Make sure the right object is active
-		//togetherObj.SetActive(together);
-		//brokenObj.SetActive(!together);
-		if (!together) {
-			Break ();
-		}
-
+		ExplodeEverything ();
 		if (breakOnNoSupports) {
-			CheckForSupports ();
+			CheckDownwardsForSupports ();
 		}
 	}
 
-	void CheckForSupports ()
+	void CheckDownwardsForSupports ()
 	{
-		//Check downwards for supports
 		if (!Physics.Raycast (transform.position, Vector3.down, raycastLength)) {
-			Break ();
-		}
-	}
-
-	void DoCollisionLogic (Collision collision)
-	{
-		//Otherwise, if velocity is strong enough to break some bits but not others...
-		//Get the impact point
-		spherePoint = collision.contacts [0].point;
-		//Get the radius within which we'll break pieces
-		sphereRadius = collision.relativeVelocity.magnitude / velocityToBreak * breakageMultiplier;
-		//Turn on Colliders so that Physics.OverlapSphere will work
-		//Turn on Renderer for pieces
-		foreach (Rigidbody rigid in rigids) {
-			rigid.GetComponent<Collider> ().enabled = true;
-		}
-		Collider[] pieces = Physics.OverlapSphere (spherePoint, sphereRadius, 1 << 8);
-		//Make the broken-off pieces non-kinematic
-		foreach (Collider piece in pieces) {
-			Rigidbody rigid = piece.GetComponent<Rigidbody> ();
-			rigid.isKinematic = false;
-		}
-		//And turn off the Colliders of the not broken-off pieces 
-		foreach (Rigidbody rigid in rigids) {
-			rigid.GetComponent<Collider> ().enabled = !rigid.isKinematic;
+			ExplodeEverything ();
 		}
 	}
 
 	void OnCollisionEnter (Collision collision)
 	{
-		if (collision.transform.CompareTag (collisionTag) && breakOnCollision) {
-			//Only break if relative velocity is high enough
+		if (collision.transform.CompareTag (TAG_ALLOWED_TO_EXPLODE_THINGS) && breakOnCollision) {
 			if (collision.relativeVelocity.magnitude > velocityToBreak) {
-				Break ();
-			} else if (collision.relativeVelocity.magnitude / velocityToBreak > strength) {
-				DoCollisionLogic (collision);
+				ExplodeEverything ();
 			}
 		}
 	}
 
-	public void Break ()
+	public void ExplodeEverything ()
 	{
 		SetPiecesKinematic (false);
 		SetRenderersEnabled (true);
 		renderers [0].gameObject.SetActive (false);
-		//Play the sound
 		if (soundOnBreak) {
 			src.Play ();
 		}
-		//Show particles
 		if (particlesOnBreak) {
-			psys.Play ();
+			particles.Play ();
 		}
 	}
 
@@ -198,17 +140,14 @@ public class Destruction : MonoBehaviour
 			rigid.GetComponent<Collider> ().enabled = !valueIn;
 		}
 		coll.enabled = valueIn;
-		_rigidbody.isKinematic = !valueIn;
+		GetComponent<Rigidbody> ().isKinematic = !valueIn;
 	}
 
 	public void BreakWithExplosiveForce (float force, float radius = 3)
 	{
-		Break ();
-
-		//Add the explosive force to each rigidbody
+		ExplodeEverything ();
 		foreach (Rigidbody rigid in rigids) {
 			rigid.AddExplosionForce (force, transform.position, radius);
 		}
 	}
-
 }
