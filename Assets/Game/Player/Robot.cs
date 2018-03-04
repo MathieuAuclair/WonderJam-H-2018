@@ -37,7 +37,6 @@ public class Robot : Character
         Controller.Subscribe(CharacterAction.MOVE, Move);
         Controller.Subscribe(CharacterAction.JETPACK, jetpack.Begin, jetpack.End);
         Controller.Subscribe(CharacterAction.TORSO, torso.Rotate);
-        Controller.Subscribe(CharacterAction.LASER, laser.Activate, laser.Deactivate);
     }
 
     void Move(float h, float v)

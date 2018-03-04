@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 
-public class Laser : MonoBehaviour, IProjectile
+public class Laser : MonoBehaviour
 {
-    public void Launch(Vector3 direction)
+    void OnTriggerEnter(Collider col)
     {
-        // push laser in direction
+        var building = col.GetComponent<Destruction>();
+        if (building != null)
+        {
+            building.ExplodeWithForce(20);
+            ScoreBoard.IncreaseScore(GetComponentInParent<PlayerController>().PlayerId, 1);
+        }
     }
 }

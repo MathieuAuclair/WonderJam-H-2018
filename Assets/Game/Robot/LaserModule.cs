@@ -4,14 +4,33 @@
 public class LaserModule : CharacterModule
 {
     [SerializeField] GameObject laser;
+    [SerializeField] float duration;
+    [SerializeField] float cooldown;
 
-    public void Activate()
-    {
-        laser.SetActive(true);
-    }
+    float timeLeft;
+    float delayLeft;
 
-    public void Deactivate()
+    public override void FixedUpdate()
     {
-        laser.SetActive(false);
+        if (timeLeft >= 0)
+        {
+            timeLeft -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            laser.SetActive(false);
+            if (delayLeft <= 0)
+            {
+                delayLeft = cooldown;
+                timeLeft = duration;
+                timeLeft = duration;
+                laser.SetActive(true);
+            }
+            else
+            {
+                delayLeft -= Time.deltaTime;
+            }
+        }
+
     }
 }

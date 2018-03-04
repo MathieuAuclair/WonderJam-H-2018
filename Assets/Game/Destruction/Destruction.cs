@@ -129,20 +129,18 @@ public class Destruction : MonoBehaviour
 				var a = _pool.GetInstance (collision.transform.position);
 				a.GetComponentInChildren<ParticleSystem> ().Play ();
 				currentlyPlayingParticles.Add (a);
-				if (particlesOnExplode) {
-				}
 				int scream = Random.Range (0, 4);
 				if (scream == 1) {
 					CrackleAudio.SoundController.PlaySound ("scream");
 				}
-				UpdateScore (collision);
+				UpdateScore (collision, UnityEngine.Random.Range(1f, GetComponent<Destruction>().velocityToExplode));
 			}
 		}
 	}
 
-	static void UpdateScore (Collision collision)
+	static void UpdateScore (Collision collision, float amount)
 	{
-		ScoreBoard.IncreaseScore (collision.gameObject.GetComponentInParent<PlayerController> ().PlayerId, 1);
+		ScoreBoard.IncreaseScore (collision.gameObject.GetComponentInParent<PlayerController> ().PlayerId, amount);
 	}
 
 	public void ExplodeEverything ()

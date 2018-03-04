@@ -2,45 +2,41 @@
 
 public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 {
-	readonly IDictionary<int, int> scores = new Dictionary<int, int>();
-	readonly IDictionary<int, string> nameMapping = new Dictionary<int, string>();
-    int maxScorePlayerId = -1;
+	readonly IDictionary<int, float> scores = new Dictionary<int, float> ();
+	int maxScoreKey = -1;
 
-    public static IDictionary<int, int> GetScores()
-    {
-        return Instance._GetScores();
-    }
-
-    IDictionary<int, int> _GetScores()
-    {
-        return scores;
+	public static IDictionary<int, float> GetScores ()
+	{
+		return Instance._GetScores ();
 	}
 
-    public static void Reset()
-    {
-        Instance._Reset();
-    }
+	IDictionary<int, float> _GetScores ()
+	{
+		return scores;
+	}
+
+	public static void Reset ()
+	{
+		Instance._Reset ();
+	}
 
     void _Reset()
     {
         scores.Clear();
     }
 
-    public static void IncreaseScore(int playerKey, int gain)
-    {
-        Instance._IncreaseScore(playerKey, gain);
-    }
+	public static void IncreaseScore (int playerKey, float gain)
+	{
+		Instance._IncreaseScore (playerKey, gain);
+	}
 
-    void _IncreaseScore(int playerKey, int gain)
-    {
-        if (scores.ContainsKey(playerKey))
-        {
-            scores[playerKey] += gain;
-        }
-        else
-        {
-            scores[playerKey] = gain;
-        }
+	void _IncreaseScore (int playerKey, float gain)
+	{
+		if (scores.ContainsKey (playerKey)) {
+			scores [playerKey] += gain;
+		} else {
+			scores [playerKey] = gain;
+		}
 
         if (!scores.ContainsKey(maxScorePlayerId) || scores[playerKey] > scores[maxScorePlayerId])
         {
@@ -58,51 +54,26 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 		return maxScorePlayerId;
     }
 
-    public static int GetScore(int playerId)
-    {
-        return Instance._GetScore(playerId);
-    }
-
-    int _GetScore(int playerId)
-    {
-        if (!scores.ContainsKey(playerId))
-        {
-            scores[playerId] = 0;
-        }
-        return scores[playerId];
+	public static float GetScore (int playerId)
+	{
+		return Instance._GetScore (playerId);
 	}
 
-	public static string GetName(int playerId)
+	float _GetScore (int playerId)
 	{
-		return Instance._GetName(playerId);
-	}
-
-	string _GetName(int playerId)
-	{
-		if (!nameMapping.ContainsKey(playerId))
-		{
-			nameMapping[playerId] = "";
+		if (!scores.ContainsKey (playerId)) {
+			scores [playerId] = 0;
 		}
-		return nameMapping[playerId];
+		return scores [playerId];
 	}
 
-	public static void SetName(int playerId, string name)
+	public static KeyValuePair<int, float> GetLeadingWithScore ()
 	{
-		Instance._SetName(playerId, name);
+		return Instance._GetLeadingWithScore ();
 	}
 
-	void _SetName(int playerId, string _name)
+	KeyValuePair<int, float> _GetLeadingWithScore ()
 	{
-		nameMapping [playerId] = _name;
+		return new KeyValuePair<int, float> (maxScoreKey, scores [maxScoreKey]);
 	}
-
-    public static KeyValuePair<int, int> GetLeadingWithScore()
-    {
-        return Instance._GetLeadingWithScore();
-    }
-
-    KeyValuePair<int, int> _GetLeadingWithScore()
-    {
-        return new KeyValuePair<int, int>(maxScorePlayerId, scores[maxScorePlayerId]);
-    }
 }
