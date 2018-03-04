@@ -6,17 +6,21 @@ public class GameController : MonoBehaviour
     enum Phase
     {
         REGISTRATION,
-        COUNTDOWN,
         GAME,
         END,
     }
 
     const string JOIN = "P{0}Jump";
 
+    [Header("Tweakables")]
+    [SerializeField][Range(1, 4)] int playerCount = 4;
+    [SerializeField] int gameTime = 30;
+    
+    [Header("Can't Touch This")]
     [SerializeField] Bonfire.Screen screen;
     [SerializeField] PlayerController playerPrefab;
-    [SerializeField] int playerCount = 4;
     [SerializeField] CountDown startCountdown;
+    [SerializeField] Timer endGameTimer;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -36,8 +40,6 @@ public class GameController : MonoBehaviour
             case Phase.REGISTRATION:
                 UpdateRegistration();
                 break;
-            case Phase.COUNTDOWN:
-                break;
             case Phase.GAME:
                 break;
         }
@@ -56,16 +58,22 @@ public class GameController : MonoBehaviour
             }
             else if (Input.GetButtonDown("StartGame"))
             {
-                currentPhase = Phase.COUNTDOWN;
-                startCountdown.Initiate(3, "DÉTRUISEZ!!!", StartGame);
+                currentPhase = Phase.GAME;
+                startCountdown.Initiate(3, "DÉTRUISEZ!!!", BeginGame);
             }
         }
     }
 
-    void StartGame()
+    void BeginGame()
     {
+        endGameTimer.Initiate(gameTime, "", EndGame);
         GiveControl();
-        currentPhase = Phase.GAME;
+    }
+
+    void EndGame()
+    {
+        RemoveControl();
+        currentPhase = Phase.END;
     }
 
     void AddPlayer(int playerId)
@@ -81,6 +89,14 @@ public class GameController : MonoBehaviour
         foreach (var player in players.Values)
         {
             player.GetComponentInChildren<Character>().SetController(player);
+        }
+    }
+
+    void RemoveControl()
+    {
+        foreach (var player in players.Values)
+        {
+            player.UnsubscribeEverything();
         }
     }
 }

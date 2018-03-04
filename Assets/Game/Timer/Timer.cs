@@ -1,31 +1,57 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using System;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField]
-    float timeLeft = 30f;
+    [SerializeField] Text display;
 
-    // Update is called once per frame
+    string endMessage;
+    float timeLeft;
+    bool running;
+    Action onEnd;
+
+    void Start()
+    {
+        GetComponent<Text>().text = string.Empty;
+    }
+
+    public void Initiate(int duration, string endMessage, Action onEnd = null)
+    {
+        this.endMessage = endMessage;
+        timeLeft = duration;
+        running = true;
+        this.onEnd = onEnd ?? delegate
+        {
+        };
+    }
+
     void Update()
     {
-        if (timeLeft > 0)
+        if (running)
         {
             timeLeft -= Time.deltaTime;
-            timeLeft = Mathf.Round(timeLeft * 100f) / 100f;
-            string timeLeftString = timeLeft.ToString();
-            timeLeftString = timeLeftString.PadRight(5, '0');
-            GetComponent<Text>().text = timeLeftString;
+            if (timeLeft <= 0)
+            {
+                End();
+            }
+            else
+            {
+                UpdateTimer();
+            }
         }
-        else
-        {
-            timeLeft = 0;
-            timeLeft = Mathf.Round(timeLeft * 100f) / 100f;
-            GetComponent<Text>().text = "" + timeLeft;
-            Debug.Log("EndGame");
-            SceneManager.LoadScene(0);
-        }
+    }
 
+    void End()
+    {
+        running = false;
+        display.text = "0";
+        onEnd();
+    }
+
+    void UpdateTimer()
+    {
+        float displayedTime = (Mathf.Round(timeLeft * 100) * 0.01f);
+        display.text = displayedTime.ToString();
     }
 }
