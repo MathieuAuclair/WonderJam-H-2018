@@ -25,9 +25,10 @@ GameObject:
   - component: {fileID: 114603076457761510}
   - component: {fileID: 114331010991992530}
   - component: {fileID: 136049970192421124}
+  - component: {fileID: 114923768832448218}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,8 +63,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1451932474398470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: -4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6, y: 5, z: -5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4994851013919842}
   m_Father: {fileID: 0}
@@ -111,7 +112,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -176,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940ec01e76f254e999254b4f18123092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredMagnitudeToBreak: 8.5
+  requiredMagnitudeToBreak: 1
 --- !u!114 &114546412570526364
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -212,13 +213,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
+--- !u!114 &114923768832448218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1451932474398470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7874bea6b8274ce1b3c4f49ecb49a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namesJson: {fileID: 4900000, guid: 65f8298252f942244844aa5fff93c57c, type: 3}
+  nameText: {fileID: 0}
 --- !u!114 &114923871512169478
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1511660488815938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
@@ -236,8 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Axes: 1
-  SensitivityX: 15
-  SensitivityY: 15
+  SensitivityX: 1
+  SensitivityY: 1
   MinimumX: -360
   MaximumX: 360
   MinimumY: -60

@@ -1,33 +1,78 @@
 ﻿using System.Collections.Generic;
 
-public partial class ScoreBoard
+public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 {
-	readonly IDictionary<string, int> scores = new Dictionary<string, int>();
-	private string maxScoreKey = "";
+	readonly IDictionary<string, int> scores = new Dictionary<string, int> ();
+	string maxScoreKey = "";
 
-	public IDictionary<string, int> GetScores()
+	public static IDictionary<string, int> GetScores ()
+	{
+		return Instance._GetScores ();
+	}
+
+	IDictionary<string, int> _GetScores ()
 	{
 		return scores;
 	}
 
-	public void Reset()
+	public static void Reset ()
 	{
-		scores.Clear();
+		Instance._Reset ();
 	}
 
-	public void IncreaseScore(string id, int gain)
+	void _Reset ()
 	{
-		if (scores.ContainsKey(id))
-			scores[id] += gain;
-		else
-			scores[id] = gain;
+		scores.Clear ();
+	}
 
-		if (scores [id] > scores[maxScoreKey]) {
-			maxScoreKey = id;
+	public static void IncreaseScore (string playerKey, int gain)
+	{
+		Instance._IncreaseScore (playerKey, gain);
+	}
+
+	void _IncreaseScore (string playerKey, int gain)
+	{
+		if (scores.ContainsKey (playerKey)) {
+			scores [playerKey] += gain;
+		} else {
+			scores [playerKey] = gain;
+		}
+
+		if (!scores.ContainsKey (maxScoreKey) || scores [playerKey] > scores [maxScoreKey]) {
+			maxScoreKey = playerKey;
 		}
 	}
 
-	public string GetLeading(){
+	public static string GetLeading ()
+	{
+		return Instance._GetLeading ();
+	}
+
+	string _GetLeading ()
+	{
 		return maxScoreKey;
+	}
+
+	public static int GetScore (string playerKey)
+	{
+		return Instance._GetScore (playerKey);
+	}
+
+	int _GetScore (string playerKey)
+	{
+		if (!scores.ContainsKey (playerKey)) {
+			scores [playerKey] = 0;
+		}
+		return scores [playerKey];
+	}
+
+	public static KeyValuePair<string, int> GetLeadingWithScore ()
+	{
+		return Instance._GetLeadingWithScore ();
+	}
+
+	KeyValuePair<string, int> _GetLeadingWithScore ()
+	{
+		return new KeyValuePair<string, int> (maxScoreKey, scores [maxScoreKey]);
 	}
 }

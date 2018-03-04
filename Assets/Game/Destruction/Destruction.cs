@@ -170,6 +170,7 @@ public class Destruction : MonoBehaviour
 			//Only break if relative velocity is high enough
 			if (collision.relativeVelocity.magnitude > velocityToBreak) {
 				Break ();
+				ScoreBoard.IncreaseScore (collision.gameObject.tag, 1);
 			} else if (collision.relativeVelocity.magnitude / velocityToBreak > strength) {
 				DoCollisionLogic (collision);
 			}
