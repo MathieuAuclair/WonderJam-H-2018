@@ -1153,6 +1153,10 @@ MonoBehaviour:
     maximumSpeed: 12
     maximumSlopeAngle: 50
     wall: {fileID: 0}
+  fastBoost:
+    enabled: 0
+    stateBoolean: 
+    speedModifier: 1.6
   jetpack:
     enabled: 1
     stateBoolean: 
