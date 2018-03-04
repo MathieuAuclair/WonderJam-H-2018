@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4075879346426782}
   - component: {fileID: 20668243668338040}
   - component: {fileID: 124579249878771468}
+  - component: {fileID: 114352016960372040}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -107,6 +108,18 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &114352016960372040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1705015426077470}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: a744158d07222844ea1959d442180ce0, type: 2}
 --- !u!114 &114394759237540732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,8 +141,11 @@ MonoBehaviour:
   swatches:
   - {fileID: 11400000, guid: 0e30b372e9c67b4499f1e34ac3015f1a, type: 2}
   - {fileID: 11400000, guid: 5d79971f1c0301e4db2299c55a4091aa, type: 2}
+  - {fileID: 11400000, guid: 0d60b30616c13314692d2445bb598668, type: 2}
+  - {fileID: 11400000, guid: 1e2613bdb97e35841b359530dcd1a2f9, type: 2}
   periphericView: {fileID: 20668243668338040}
   intro: {fileID: 0}
+  leaderBoard: {fileID: 0}
 --- !u!124 &124579249878771468
 Behaviour:
   m_ObjectHideFlags: 1

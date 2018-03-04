@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea215a1eaf096e342a32006fe52f740a, type: 3}
-  m_Name: Player2
+  m_Name: Player4
   m_EditorClassIdentifier: 
-  body: {fileID: 2100000, guid: 410b8506bcef23a4996c4779990696c5, type: 2}
-  glass: {fileID: 2100000, guid: 760a6dd60e13ff14aa5aa2177aa1a807, type: 2}
-  limb: {fileID: 2100000, guid: a73e09b97c908b0489df10fdcd00d645, type: 2}
-  joint: {fileID: 2100000, guid: 76a6aa8d642b8014980dda9e7f7347d3, type: 2}
+  body: {fileID: 2100000, guid: a60970e3e0e82924e8eee7340049ee59, type: 2}
+  glass: {fileID: 2100000, guid: 065d3652abe031f47824fc739498dba1, type: 2}
+  limb: {fileID: 2100000, guid: 795d28927b2891d40b4069b41f6dec66, type: 2}
+  joint: {fileID: 2100000, guid: 0c31a0766986c304695499cc6e806974, type: 2}
