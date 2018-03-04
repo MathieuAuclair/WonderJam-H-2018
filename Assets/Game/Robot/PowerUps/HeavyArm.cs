@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeavyArm : RobotActionBase
+[System.Serializable]
+public class HeavyArm : CharacterModule
 {
-    public override void ActionBegins()
-    {
-        Rigidbody body = gameObject.GetComponent<Rigidbody>();
-        body.mass = body.mass * 5;
+    [SerializeField]
+    float upgradedWeight = 15.0f;
+
+      public override bool IsEnabled {
+        get { return base.IsEnabled;}
+        set {
+            if(value)
+                BuffArms();
+            base.IsEnabled = value;
+        }
     }
 
-    public override void ActionEnds()
+   
+ void BuffArms()
+
     {
-        Rigidbody body = gameObject.GetComponent<Rigidbody>();
-        body.mass = body.mass * 5;
+        OwnBody.mass = upgradedWeight;
     }
 }

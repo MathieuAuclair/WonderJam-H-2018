@@ -9,6 +9,6 @@ public class FastBoost : CharacterModule
     float speedModifier = 1.6f;
     public override void FixedUpdate()
     {
-        OwnBody.velocity *= speedModifier;
+        OwnBody.velocity = new Vector3(OwnBody.velocity.x * speedModifier, 0, OwnBody.velocity.z * speedModifier);
     }
 }

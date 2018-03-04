@@ -1187,9 +1187,14 @@ MonoBehaviour:
   particlesOnExplode: 0
   propLifeSpan: 5
   isPropDestroyedAfterLifeSpan: 0
+<<<<<<< HEAD
+  particlePoolName: HitPool
+=======
   powerUps:
   - {fileID: 1651209459992494, guid: c5798339251994fdaaaaf641059e6e08, type: 2}
   - {fileID: 1877933150893080, guid: 9a280c76d597e4d168488ba2d7ac90ec, type: 2}
   - {fileID: 1864982838941152, guid: e103a97fce8814851a5ed56adbd721f6, type: 2}
   - {fileID: 1962402064069262, guid: df504bb3f708845a2a79f1ac87bfd0bc, type: 2}
-  hitParticle: {fileID: 0}
+  hitParticle: {fileID: 1252412786230152, guid: 7777eed54d147834c9e870397285ae26,
+    type: 2}
+>>>>>>> origin/power-up

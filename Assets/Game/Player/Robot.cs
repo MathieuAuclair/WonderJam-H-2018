@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Robot : Character
 {
     [Header("Modules")]
     [SerializeField] MovementModule movement;
+    [SerializeField] HeavyArm heavyArm;
+    [SerializeField] BigArm bigArm;
     [SerializeField] FastBoost fastBoost;
     [SerializeField] JetPackModule jetpack;
     [SerializeField] TorsoModule torso;
@@ -12,11 +15,15 @@ public class Robot : Character
     [Header("Sensors")]
     [SerializeField] GroundSensor ground;
 
+    IDictionary<PowerUpPicker.Power, CharacterModule> powerUps;
+
     void Start()
     {
         InitializeModules(new CharacterModule[]
             {
                 movement,
+                heavyArm,
+                bigArm,
                 fastBoost,
                 jetpack,
                 torso,
@@ -25,6 +32,14 @@ public class Robot : Character
 
         ground.Initialize();
         movement.Ground = ground;
+
+        powerUps = new Dictionary<PowerUpPicker.Power, CharacterModule>()
+        {
+            {PowerUpPicker.Power.BIG_ARM, bigArm},
+            {PowerUpPicker.Power.HEAVY_ARM, heavyArm},
+            {PowerUpPicker.Power.FAST, fastBoost},
+            {PowerUpPicker.Power.LASER, laser},
+        };
     }
 
     public void ShutDown()
@@ -32,6 +47,12 @@ public class Robot : Character
         movement.IsEnabled = false;
     }
 
+    public void ActivatePowerUp(PowerUpPicker.Power power, GameObject other)
+    {
+        Destroy(other);
+        if(!powerUps[power].IsEnabled)
+            powerUps[power].IsEnabled = true;
+    }
     protected override void SubscribeToController()
     {
         Controller.Subscribe(CharacterAction.MOVE, Move);

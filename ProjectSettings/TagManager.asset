@@ -7,6 +7,12 @@ TagManager:
   - prop
   - broken-prop
   - Player1
+  - robot
+  - powerUpLazer
+  - powerUpBigArm
+  - powerUpHeavyArm
+  - powerUpFastBoost
+  - dome
   layers:
   - Default
   - TransparentFX
