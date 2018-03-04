@@ -306,9 +306,9 @@ public class Buildings {
 		foreach (GameObject other in this.BuildingsList)
 			if (Vector3.Distance (building.transform.position, other.transform.position) > 25f)
 				continue;
-			else if (buildingBound.Intersects (other.GetComponentInChildren<MeshCollider> ().bounds))
+			else if (other.transform.childCount > 0 && buildingBound.Intersects (other.GetComponentInChildren<MeshCollider> ().bounds)){
 				return false;
-
+			}
 		if (this.IntersectsRoad (building))
 			return false;
 

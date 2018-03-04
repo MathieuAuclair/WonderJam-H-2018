@@ -49,6 +49,7 @@ public class CityGenerator : MonoBehaviour {
 			};
 			control.MapAngle = 0;
 			control.currentType = ControlRoads.GridType.X_Type;
+			renderer1.Intersections.transform.position = new Vector3(renderer1.Intersections.transform.position.x, renderer1.Intersections.transform.position.y + 0.03f, renderer1.Intersections.transform.position.z);
 			buildings_controller.control = control;
 			buildings.Add (buildings_controller);
 			cities.Add (control);

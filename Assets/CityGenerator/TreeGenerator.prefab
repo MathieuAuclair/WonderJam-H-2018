@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1165789087683312}
+  m_IsPrefabParent: 1
+--- !u!1 &1165789087683312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4301559777123854}
+  - component: {fileID: 114013569010098396}
+  m_Layer: 0
+  m_Name: TreeGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4301559777123854
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165789087683312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -57.2, y: 0.5, z: 129.3}
+  m_LocalScale: {x: 75.0435, y: 1, z: 28.052584}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114013569010098396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165789087683312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5181fefc28ee1254099451aea7ac9e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modeleArbres:
+  - {fileID: 1907911181686560, guid: 1b2d5d72300cf494f8a1f27b8464c162, type: 2}
+  - {fileID: 1501309145762544, guid: 1f9eae72b61abe043848f4d6d8788f67, type: 2}
+  - {fileID: 1303852028453690, guid: d74c9345c0f2a3d4083b2366558d1a31, type: 2}
+  limiteModele: ffffffffffffffffffffffff
+  distMinGen: 2
+  nbPtsEssai: 10
+  sqSize: 5
+  scalePerlin: 5
+  multiplicateurChance: 1.1
+  multiplicateurPerlin: 1
+  biaisPerlin: 0
+  biaisChance: 0
+  afficherPlan: 0
