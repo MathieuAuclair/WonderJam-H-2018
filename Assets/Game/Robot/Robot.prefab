@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 4957463814542424}
   - component: {fileID: 54446938564498426}
   - component: {fileID: 114445507606911534}
+  - component: {fileID: 114540633440627588}
   m_Layer: 8
   m_Name: Hips
   m_TagString: Untagged
@@ -1177,7 +1178,7 @@ MonoBehaviour:
     stateBoolean: 
     rightArm: {fileID: 4236619624023266}
     leftArm: {fileID: 4020465822159014}
-    sizeRatio: 4
+    sizeRatio: 2
   fastBoost:
     enabled: 0
     stateBoolean: 
@@ -1211,6 +1212,18 @@ MonoBehaviour:
     ray: {x: 0, y: -0.2, z: 0}
     all: 0
     maximumSlopeAngle: 50
+--- !u!114 &114540633440627588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1700170951491362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a343f808783164461bebbebcfd2e5bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotMainBodyPart: {fileID: 1700170951491362}
 --- !u!114 &114670596761994100
 MonoBehaviour:
   m_ObjectHideFlags: 1
