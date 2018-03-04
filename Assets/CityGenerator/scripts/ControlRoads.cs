@@ -18,7 +18,7 @@ public class ControlRoads {
 	public Text GridTypeText;
 
 	public enum GridType {X_Type, Y_Type, O_Type};
-	private GridType currentType;
+	public GridType currentType;
 
 	public ControlRoads(){
 		this.currentType = RandomEnumValue<GridType> ();
@@ -28,12 +28,6 @@ public class ControlRoads {
 	{
 		var v = Enum.GetValues (typeof (T));
 		return (T) v.GetValue (UnityEngine.Random.Range(0, v.Length));
-	}
-
-	public void GridTypeClick()
-	{
-		this.currentType = (GridType)this.GridSlider.value;
-		this.GridTypeText.text = this.currentType.ToString ().Replace('_','-');
 	}
 
 	public void GenerateMap()
