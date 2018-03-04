@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Timer endGameTimer;
     [SerializeField] ColorSwatch[] swatches;
     [SerializeField] Camera periphericView;
+    [SerializeField] IntroScreen intro;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -59,6 +60,7 @@ public class GameController : MonoBehaviour
             {
                 if (Input.GetButtonDown(string.Format(JOIN, i)))
                 {
+                    intro.HideLogo();
                     AddPlayer(i);
                     periphericView.enabled = false;
                 }
@@ -67,6 +69,7 @@ public class GameController : MonoBehaviour
             {
                 currentPhase = Phase.GAME;
                 startCountdown.Initiate(3, "DÉTRUISEZ!!!", BeginGame);
+                intro.HideInstructions();
             }
         }
     }
