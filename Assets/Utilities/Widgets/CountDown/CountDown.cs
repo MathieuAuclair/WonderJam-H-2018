@@ -28,7 +28,7 @@ public class CountDown : MonoBehaviour
         };
     }
 
-    public void Update()
+    void Update()
     {
         if (running)
         {

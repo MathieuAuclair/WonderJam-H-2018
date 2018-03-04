@@ -40,6 +40,11 @@ public class BlenderToUnityPipeline
 		t.gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 	}
 
+	static void SetMeshColliderFromFirstChild (Transform selected)
+	{
+		selected.GetComponent<MeshCollider> ().sharedMesh = selected.GetChild (0).GetComponent<MeshCollider> ().sharedMesh;
+	}
+
 	[MenuItem ("Tools/BlenderToUnityWithMesh")]
 	static void NewMenuOption ()
 	{
@@ -61,13 +66,13 @@ public class BlenderToUnityPipeline
 		foreach (Transform child in allChildren) {
 			child.SetParent (selected);
 		}
-		selected.rotation = Quaternion.Euler (new Vector3 (90, 0, 0));
+		selected.rotation = Quaternion.Euler (new Vector3 (-90, 0, 0));
 
 		AddDestructionScript (selected);
 		SetDestructionValues (selected);
 
 		AddMeshColliderAndRigidbody (selected);
 		SetKinematicAndConvex (selected);
-		Debug.LogWarning ("Add the mesh on the main object manually");
+		SetMeshColliderFromFirstChild (selected);
 	}
 }

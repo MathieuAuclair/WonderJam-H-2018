@@ -58,13 +58,14 @@ namespace CrackleAudio
             throw new System.NotImplementedException();
         }
 
-        public static void PlayMusic(string songName)
+        public static void PlayMusic(string songName, float volume)
         {
-            Instance.PlayMusicImpl(songName);
+            Instance.PlayMusicImpl(songName, volume);
         }
 
-        void PlayMusicImpl(string songName)
+        void PlayMusicImpl(string songName, float volume)
         {
+            musicSource.volume = volume;
             musicSource.clip = musicMap[songName].GetRandomSound();
             musicSource.Play();
         }
