@@ -9,31 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1893306096088078}
+  m_RootGameObject: {fileID: 1084021556562738}
   m_IsPrefabParent: 1
---- !u!1 &1893306096088078
+--- !u!1 &1084021556562738
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4228167355783166}
-  - component: {fileID: 114272560382010386}
-  - component: {fileID: 81476652506929542}
+  - component: {fileID: 4082510279644068}
+  - component: {fileID: 114394759237540732}
   m_Layer: 0
-  m_Name: CrackleAudio
-  m_TagString: Untagged
+  m_Name: GameController
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4228167355783166
+--- !u!4 &4082510279644068
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1893306096088078}
+  m_GameObject: {fileID: 1084021556562738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,32 +40,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &81476652506929542
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1893306096088078}
-  m_Enabled: 1
---- !u!114 &114272560382010386
+--- !u!114 &114394759237540732
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1893306096088078}
+  m_GameObject: {fileID: 1084021556562738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6d8d695f9c8e1479cb7203ecc33a55, type: 3}
+  m_Script: {fileID: 11500000, guid: 1000d71543aa93c47b2249a905d3b894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundGroups:
-  - name: robotwalking
-    sounds:
-    - {fileID: 8300000, guid: 6dff1fc0914cd5f42bd5503c57bbecad, type: 3}
-  - name: shutdown
-    sounds:
-    - {fileID: 8300000, guid: e97b1ef1e2e70ae4b9d00c94f5bd7505, type: 3}
-  musics:
-  - name: main
-    sounds:
-    - {fileID: 8300000, guid: 1e1e5ba01a137c04e903d3fdced2dfde, type: 3}
+  screen: {fileID: 114302923288511792, guid: a4d799eb2c20db845807d84132cfb850, type: 2}
+  playerPrefab: {fileID: 114794848452364862, guid: 6cc4daa1dea8f1e40b54304eff9f6b45,
+    type: 2}
+  playerCount: 4
+  startCountdown: {fileID: 0}
