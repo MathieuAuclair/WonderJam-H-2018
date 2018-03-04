@@ -12,7 +12,6 @@ public class PlayerController : InputController
     public const string AIM_VERTICAL = "P{0}Vertical2";
     public const string HORIZONTAL_AXIS = "P{0}Horizontal1";
     public const string VERTICAL_AXIS = "P{0}Vertical1";
-    public const string JUMP = "P{0}Jump";
 
     IList<string> actions;
     IList<string> axialActions;
@@ -51,6 +50,7 @@ public class PlayerController : InputController
         actions = new List<string>(1)
         {
             CharacterAction.JETPACK,
+            //CharacterAction.LASER,
         };
 
         axialActions = new List<string>(0);
@@ -58,12 +58,13 @@ public class PlayerController : InputController
 
     void MapInputs()
     {
-        inputMapping = new Dictionary<string, string>(5);
+        inputMapping = new Dictionary<string, string>(6);
         Map(HORIZONTAL_AXIS);
         Map(VERTICAL_AXIS);
         Map(AIM_HORIZONTAL);
         Map(AIM_VERTICAL);
         Map(CharacterAction.JETPACK);
+        Map(CharacterAction.LASER);
     }
 
     void Map(string key)
