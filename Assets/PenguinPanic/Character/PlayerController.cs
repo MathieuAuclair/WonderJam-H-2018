@@ -66,7 +66,7 @@ public class PlayerController : InputController
 	}
 
 	void PassPlayerIdToCanvasForScore() {
-		_view.GetComponent<PlayerViewCanvas> ().SetPlayerId (gameObject.tag);
+		_view.GetComponent<PlayerViewCanvas> ().SetPlayerId (_playerId);
 	}
 
     void MapInputs()

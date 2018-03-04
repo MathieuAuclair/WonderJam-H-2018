@@ -2,15 +2,15 @@
 
 public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 {
-	readonly IDictionary<string, int> scores = new Dictionary<string, int> ();
-	string maxScoreKey = "";
+	readonly IDictionary<int, int> scores = new Dictionary<int, int> ();
+	int maxScoreKey = -1;
 
-	public static IDictionary<string, int> GetScores ()
+	public static IDictionary<int, int> GetScores ()
 	{
 		return Instance._GetScores ();
 	}
 
-	IDictionary<string, int> _GetScores ()
+	IDictionary<int, int> _GetScores ()
 	{
 		return scores;
 	}
@@ -25,12 +25,12 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 		scores.Clear ();
 	}
 
-	public static void IncreaseScore (string playerKey, int gain)
+	public static void IncreaseScore (int playerKey, int gain)
 	{
 		Instance._IncreaseScore (playerKey, gain);
 	}
 
-	void _IncreaseScore (string playerKey, int gain)
+	void _IncreaseScore (int playerKey, int gain)
 	{
 		if (scores.ContainsKey (playerKey)) {
 			scores [playerKey] += gain;
@@ -43,36 +43,36 @@ public class ScoreBoard : PersistentRAIISingleton<ScoreBoard>
 		}
 	}
 
-	public static string GetLeading ()
+	public static int GetLeading ()
 	{
 		return Instance._GetLeading ();
 	}
 
-	string _GetLeading ()
+	int _GetLeading ()
 	{
 		return maxScoreKey;
 	}
 
-	public static int GetScore (string playerKey)
+	public static int GetScore (int playerId)
 	{
-		return Instance._GetScore (playerKey);
+		return Instance._GetScore (playerId);
 	}
 
-	int _GetScore (string playerKey)
+	int _GetScore (int playerId)
 	{
-		if (!scores.ContainsKey (playerKey)) {
-			scores [playerKey] = 0;
+		if (!scores.ContainsKey (playerId)) {
+			scores [playerId] = 0;
 		}
-		return scores [playerKey];
+		return scores [playerId];
 	}
 
-	public static KeyValuePair<string, int> GetLeadingWithScore ()
+	public static KeyValuePair<int, int> GetLeadingWithScore ()
 	{
 		return Instance._GetLeadingWithScore ();
 	}
 
-	KeyValuePair<string, int> _GetLeadingWithScore ()
+	KeyValuePair<int, int> _GetLeadingWithScore ()
 	{
-		return new KeyValuePair<string, int> (maxScoreKey, scores [maxScoreKey]);
+		return new KeyValuePair<int, int> (maxScoreKey, scores [maxScoreKey]);
 	}
 }

@@ -40,4 +40,5 @@ sysinfo.txt
 #IntelliJ
 /.idea/
 
-# End of https://www.gitignore.io/api/unity
+# Unity PlayMode test scenes
+/Assets/InitTestScene*.Unity*

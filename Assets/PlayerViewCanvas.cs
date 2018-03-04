@@ -3,12 +3,13 @@ using TMPro;
 
 public class PlayerViewCanvas : MonoBehaviour
 {
-	string _playerId;
-	public void SetPlayerId (string playerId)
+	int _playerId;
+
+	public void SetPlayerId (int playerId)
 	{
 		_playerId = playerId;
 	}
-			
+
 	[SerializeField] TextMeshPro tmName;
 	[SerializeField] TextMeshPro tmScore;
 
@@ -24,6 +25,6 @@ public class PlayerViewCanvas : MonoBehaviour
 
 	void Update ()
 	{
-		SetPlayerScore (ScoreBoard.GetScore(_playerId));
+		SetPlayerScore (ScoreBoard.GetScore (_playerId));
 	}
 }

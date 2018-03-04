@@ -11,8 +11,8 @@ public class PersistentScore : MonoBehaviour
 	{
 		displayUiText = gameObject.GetComponent<Text> ();
  
-		foreach (string tagName in ScoreBoard.GetScores().Keys) {
-			output += tagName + " - " + ScoreBoard.GetScores () [tagName] + "M$\n";
+		foreach (int playerId in ScoreBoard.GetScores().Keys) {
+			output += playerId + " - " + ScoreBoard.GetScores () [playerId] + "M$\n";
 		}
 
 		displayUiText.text = output;

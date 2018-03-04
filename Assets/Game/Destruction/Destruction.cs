@@ -123,9 +123,14 @@ public class Destruction : MonoBehaviour
 				if (scream == 1) {
 					CrackleAudio.SoundController.PlaySound ("scream");
 				}
-				ScoreBoard.IncreaseScore (collision.gameObject.tag, 1);
+				UpdateScore (collision);
 			}
 		}
+	}
+
+	static void UpdateScore (Collision collision)
+	{
+		ScoreBoard.IncreaseScore (collision.gameObject.GetComponentInParent<PlayerController> ().PlayerId, 1);
 	}
 
 	public void ExplodeEverything ()
