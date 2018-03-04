@@ -1182,11 +1182,11 @@ MonoBehaviour:
     torso: {fileID: 54253436142811556}
     power: 100
   laser:
-    enabled: 1
+    enabled: 0
     stateBoolean: 
     laser: {fileID: 1305468406490808}
-    duration: 2
-    cooldown: 5
+    duration: 0
+    cooldown: 0
   ground:
     radius: 1.6
     layers:
