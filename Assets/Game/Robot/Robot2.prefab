@@ -1153,6 +1153,16 @@ MonoBehaviour:
     maximumSpeed: 12
     maximumSlopeAngle: 50
     wall: {fileID: 0}
+  heavyArm:
+    enabled: 1
+    stateBoolean: 
+    upgradedWeight: 15
+  bigArm:
+    enabled: 1
+    stateBoolean: 
+    rightArm: {fileID: 0}
+    leftArm: {fileID: 0}
+    sizeRatio: 4
   fastBoost:
     enabled: 1
     stateBoolean: 
@@ -1171,8 +1181,8 @@ MonoBehaviour:
     enabled: 0
     stateBoolean: 
     laser: {fileID: 0}
-    duration: 0
-    cooldown: 0
+    duration: 3
+    cooldown: 3
   ground:
     radius: 1.6
     layers:

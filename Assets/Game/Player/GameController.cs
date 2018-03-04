@@ -99,8 +99,8 @@ public class GameController : MonoBehaviour
     void UpdateEndGame()
     {
         if (Input.GetButtonDown("StartGame"))
-		{
-			ScoreBoard.Reset ();
+        {
+            ScoreBoard.Reset();
             SceneManager.LoadScene(0);
         }
     }
@@ -111,10 +111,7 @@ public class GameController : MonoBehaviour
         player.PlayerId = playerId;
         screen.Register(player.GetComponentInChildren<Character>().transform);
         players.Add(playerId, player);
-        if (swatches.Length <= playerId)
-        {
-            player.GetComponent<Painter>().ApplySwatch(swatches[playerId - 1]);
-        }
+        player.GetComponent<Painter>().ApplySwatch(swatches[playerId - 1]);
     }
 
     void GiveControl()

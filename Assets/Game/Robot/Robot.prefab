@@ -1197,8 +1197,8 @@ MonoBehaviour:
     enabled: 0
     stateBoolean: 
     laser: {fileID: 1305468406490808}
-    duration: 0
-    cooldown: 0
+    duration: 3
+    cooldown: 3
   ground:
     radius: 1.6
     layers:

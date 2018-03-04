@@ -35,24 +35,26 @@ public class Robot : Character
 
         powerUps = new Dictionary<PowerUpPicker.Power, CharacterModule>()
         {
-            {PowerUpPicker.Power.BIG_ARM, bigArm},
-            {PowerUpPicker.Power.HEAVY_ARM, heavyArm},
-            {PowerUpPicker.Power.FAST, fastBoost},
-            {PowerUpPicker.Power.LASER, laser},
+            { PowerUpPicker.Power.BIG_ARM, bigArm },
+            { PowerUpPicker.Power.HEAVY_ARM, heavyArm },
+            { PowerUpPicker.Power.FAST, fastBoost },
+            { PowerUpPicker.Power.LASER, laser },
         };
     }
 
     public void ShutDown()
     {
         movement.IsEnabled = false;
+        fastBoost.IsEnabled = false;
     }
 
     public void ActivatePowerUp(PowerUpPicker.Power power, GameObject other)
     {
         Destroy(other);
-        if(!powerUps[power].IsEnabled)
+        if (!powerUps[power].IsEnabled)
             powerUps[power].IsEnabled = true;
     }
+
     protected override void SubscribeToController()
     {
         Controller.Subscribe(CharacterAction.MOVE, Move);
