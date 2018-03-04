@@ -35,7 +35,7 @@ public class PlayerController : InputController
 	}
 
 	public string PlayerName {
-		get { return GetComponent<PlayerName> ().name; }
+		get { return GetComponent<PlayerName> ().GetName(); }
 	}
 
 	public PlayerView View {
