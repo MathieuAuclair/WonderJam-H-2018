@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerController playerPrefab;
     [SerializeField] CountDown startCountdown;
     [SerializeField] Timer endGameTimer;
+	[SerializeField] ScoreBoard scoreBoard;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 

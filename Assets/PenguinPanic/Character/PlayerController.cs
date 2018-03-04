@@ -20,6 +20,7 @@ public class PlayerController : InputController
     Vector2 aim;
     PlayerView _view;
     IDictionary<string, string> inputMapping;
+	PlayerName playerName;
 
     int _playerId;
 
@@ -54,7 +55,19 @@ public class PlayerController : InputController
         };
 
         axialActions = new List<string>(0);
+
+		SetPlayerName ();
+		PassPlayerIdToCanvasForScore ();
     }
+
+	void SetPlayerName() {
+		playerName = GetComponent<PlayerName> ();
+		_view.GetComponent<PlayerViewCanvas> ().SetPlayerName(playerName.GetName());
+	}
+
+	void PassPlayerIdToCanvasForScore() {
+		_view.GetComponent<PlayerViewCanvas> ().SetPlayerId (gameObject.tag);
+	}
 
     void MapInputs()
     {
