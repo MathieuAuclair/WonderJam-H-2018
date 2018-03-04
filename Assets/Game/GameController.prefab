@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCount: 4
-  gameTime: 6
+  gameTime: 45
   screen: {fileID: 114302923288511792, guid: a4d799eb2c20db845807d84132cfb850, type: 2}
   playerPrefab: {fileID: 114794848452364862, guid: 6cc4daa1dea8f1e40b54304eff9f6b45,
     type: 2}
