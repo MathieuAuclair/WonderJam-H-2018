@@ -1168,12 +1168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startBroken: 0
-  breakageMultiplier: 0.3
-  strength: 0.3
-  breakOnCollision: 1
-  velocityToBreak: 1
-  breakOnNoSupports: 0
+  explodeOnCollision: 1
+  velocityToExplode: 1
+  explodeOnNoSupports: 0
   raycastLength: 1
-  soundOnBreak: 0
+  soundOnExplode: 0
   clips: []
-  particlesOnBreak: 0
+  particlesOnExplode: 0
+  hitParticle: {fileID: 1252412786230152, guid: 7777eed54d147834c9e870397285ae26,
+    type: 2}
