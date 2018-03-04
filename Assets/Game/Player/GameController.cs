@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour
                 {
                     intro.HideLogo();
                     AddPlayer(i);
-                    periphericView.enabled = false;
+                    periphericView.gameObject.SetActive(false);
                 }
             }
             else if (Input.GetButtonDown("StartGame"))
@@ -91,6 +91,7 @@ public class GameController : MonoBehaviour
 
     void ShowLeaderBoard()
     {
+        periphericView.gameObject.SetActive(true);
         screen.CleanUp();
         leaderBoard.SetActive(true);
     }

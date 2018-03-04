@@ -18,5 +18,11 @@ public class IntroScreen : MonoBehaviour
         {
             graphic.CrossFadeAlpha(0, fadeOutTime, true);
         }
+        Invoke("DeactivateSelf", fadeOutTime);
+    }
+
+    void DeactivateSelf()
+    {
+        gameObject.SetActive(false);
     }
 }
