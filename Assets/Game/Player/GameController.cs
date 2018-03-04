@@ -100,6 +100,10 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetButtonDown("StartGame"))
         {
+			foreach (int playerId in ScoreBoard.GetScores().Keys)
+			{
+				ScoreBoard.Reset ();
+			}
             SceneManager.LoadScene(0);
         }
     }

@@ -19,8 +19,7 @@ public class PersistentScore : MonoBehaviour
 		{
 			a.Scores.Add (new PlayerScore (){ Name = ScoreBoard.GetName(playerId), Score = ScoreBoard.GetScore(playerId) });
 		}
-		a.Scores.GroupBy(z => z.Name).Select(y => y.First()).OrderByDescending (x => x.Score);
-		foreach (PlayerScore player in a.Scores)
+		foreach (PlayerScore player in a.Scores.OrderByDescending (x => x.Score))
 		{
 			output += player.Name + " - " + player.Score + "M$\n";
 		}
