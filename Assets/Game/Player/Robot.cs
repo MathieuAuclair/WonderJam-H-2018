@@ -46,6 +46,7 @@ public class Robot : Character
     {
         movement.IsEnabled = false;
         fastBoost.IsEnabled = false;
+        laser.IsEnabled = false;
     }
 
     public void ActivatePowerUp(PowerUpPicker.Power power, GameObject other)

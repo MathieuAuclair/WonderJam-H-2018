@@ -12,6 +12,17 @@ public class LaserModule : CharacterModule
     float timeLeft;
     float delayLeft;
 
+    public override bool IsEnabled
+    {
+        get { return base.IsEnabled; }
+        set
+        {
+            base.IsEnabled = value;
+            if (!value)
+                laser.SetActive(false);
+        }
+    }
+
     public override void FixedUpdate()
     {
         if (timeLeft >= 0)
