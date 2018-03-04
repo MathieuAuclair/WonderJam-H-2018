@@ -53,6 +53,7 @@ public class Destruction : MonoBehaviour
 
 
 	[SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
+	[SerializeField] GameObject hitParticle;
 
 	AudioSource src;
 	ParticleSystem particles;
@@ -117,6 +118,7 @@ public class Destruction : MonoBehaviour
 			if (collision.relativeVelocity.magnitude > velocityToExplode) {
 				ExplodeEverything ();
 				CrackleAudio.SoundController.PlaySound ("destruction");
+				Instantiate (hitParticle, collision.transform.position, Quaternion.identity);
 				int scream = Random.Range (0, 4);
 				if (scream == 1) {
 					CrackleAudio.SoundController.PlaySound ("scream");

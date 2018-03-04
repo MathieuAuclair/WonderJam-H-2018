@@ -3,8 +3,11 @@ guid: 7bf7b5ee6f4fc4ecbaff2c8512e53f24
 timeCreated: 1513026843
 licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hitParticle: {fileID: 1252412786230152, guid: 7777eed54d147834c9e870397285ae26,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
