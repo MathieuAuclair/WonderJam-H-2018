@@ -312,6 +312,7 @@ ModelImporter:
     2300196: Cube_002_cell_097
     2300198: Cube_002_cell_098
     2300200: Cube_002_cell_099
+    2300202: //RootNode
     3300000: Cube_002
     3300002: Cube_002_cell
     3300004: Cube_002_cell_001
@@ -413,6 +414,7 @@ ModelImporter:
     3300196: Cube_002_cell_097
     3300198: Cube_002_cell_098
     3300200: Cube_002_cell_099
+    3300202: //RootNode
     4300000: Cube_002_cell_099
     4300002: Cube_002_cell_098
     4300004: Cube_002_cell_097
