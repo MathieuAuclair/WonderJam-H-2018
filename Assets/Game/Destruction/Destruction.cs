@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Destruction : MonoBehaviour
 {
@@ -38,7 +39,21 @@ public class Destruction : MonoBehaviour
 	[Tooltip ("Whether the object makes particles when it Explodes")]
 	public bool particlesOnExplode = false;
 
+	[Space (7)]
+	[Header ("Prop Life Span")]
+	[Space (2)]
+	[Tooltip ("How much time do you want to keep the destroyed prop")]
+	public float propLifeSpan = 10;
+
+	[Space (7)]
+	[Header ("Is Prop Destroyed After LifeSpan")]
+	[Space (2)]
+	[Tooltip ("Whether the object is destroyed or get it's rigidbody disabled")]
+	public bool isPropDestroyedAfterLifeSpan = false;
+
+
 	[SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
+	[SerializeField] GameObject hitParticle;
 
 	AudioSource src;
 	ParticleSystem particles;
@@ -72,11 +87,11 @@ public class Destruction : MonoBehaviour
 
 	void SetupSound ()
 	{
-		src = GetComponent<AudioSource> ();
-		if (src == null) {
-			src = gameObject.AddComponent<AudioSource> ();
-		}
-		src.clip = clips [Random.Range (0, clips.Length - 1)];
+		//src = GetComponent<AudioSource> ();
+		//if (src == null) {
+		//	src = gameObject.AddComponent<AudioSource> ();
+		//}
+		//src.clip = clips [Random.Range (0, clips.Length - 1)];
 	}
 
 	void SetupParticles ()
@@ -102,6 +117,12 @@ public class Destruction : MonoBehaviour
 		if (collision.transform.CompareTag (TAG_ALLOWED_TO_EXPLODE_THINGS) && explodeOnCollision) {
 			if (collision.relativeVelocity.magnitude > velocityToExplode) {
 				ExplodeEverything ();
+				CrackleAudio.SoundController.PlaySound ("destruction");
+				Instantiate (hitParticle, collision.transform.position, Quaternion.identity);
+				int scream = Random.Range (0, 4);
+				if (scream == 1) {
+					CrackleAudio.SoundController.PlaySound ("scream");
+				}
 				ScoreBoard.IncreaseScore (collision.gameObject.tag, 1);
 			}
 		}
@@ -125,9 +146,24 @@ public class Destruction : MonoBehaviour
 		foreach (Rigidbody rigid in rigids) {
 			rigid.isKinematic = valueIn;
 			rigid.GetComponent<Collider> ().enabled = !valueIn;
+			if (valueIn == false) {
+				StartCoroutine (WaitToMakeDisabledAfterPropLifeSpan (rigid.gameObject));
+			}
 		}
 		coll.enabled = valueIn;
 		GetComponent<Rigidbody> ().isKinematic = !valueIn;
+	}
+
+
+	private IEnumerator WaitToMakeDisabledAfterPropLifeSpan (GameObject prop)
+	{
+		yield return new WaitForSeconds (propLifeSpan);
+		if (isPropDestroyedAfterLifeSpan) {
+			Destroy (prop);
+		} else {
+			prop.GetComponent<Rigidbody> ().detectCollisions = false;
+			Destroy (prop, 2.5f);
+		}
 	}
 
 	public void ExplodeWithForce (float force, float radius = 3)

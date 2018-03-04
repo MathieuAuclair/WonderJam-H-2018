@@ -49,7 +49,7 @@ public class CountDown : MonoBehaviour
         running = false;
         GetComponent<Text>().text = endMessage;
         GetComponent<Animation>().Play();
-        //CrackleAudio.SoundController.PlaySound("CountdownEnd");
+        CrackleAudio.SoundController.PlaySound("go");
         onEnd();
     }
 
@@ -58,6 +58,6 @@ public class CountDown : MonoBehaviour
         GetComponent<Text>().text = nextDisplayedSecond.ToString();
         nextDisplayedSecond--;
         GetComponent<Animation>().Play();
-        //CrackleAudio.SoundController.PlaySound("CountdownSecond");
+        CrackleAudio.SoundController.PlaySound("countdown");
     }
 }
