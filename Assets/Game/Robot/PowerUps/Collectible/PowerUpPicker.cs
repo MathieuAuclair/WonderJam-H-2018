@@ -13,9 +13,12 @@ public class PowerUpPicker : MonoBehaviour
         HEAVY_ARM,
         FAST,
     }
+
     public GameObject robotMainBodyPart;
+
     void OnCollisionEnter(Collision other)
     {
+        CrackleAudio.SoundController.PlaySound("powerup");
         switch (other.transform.tag)
         {
             case "powerUpLazer":

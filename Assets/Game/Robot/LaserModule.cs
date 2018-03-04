@@ -3,10 +3,11 @@
 [System.Serializable]
 public class LaserModule : CharacterModule
 {
+    const string SOUND = "laser";
+
     [SerializeField] GameObject laser;
     [SerializeField] float duration;
     [SerializeField] float cooldown;
-    [SerializeField] string sound;
 
     float timeLeft;
     float delayLeft;
@@ -26,7 +27,7 @@ public class LaserModule : CharacterModule
                 timeLeft = duration;
                 timeLeft = duration;
                 laser.SetActive(true);
-                CrackleAudio.SoundController.PlaySound(sound);
+                CrackleAudio.SoundController.PlaySound(SOUND);
             }
             else
             {
