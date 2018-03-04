@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 95725127135505540}
   - component: {fileID: 114794848452364862}
   - component: {fileID: 114945209972053172}
+  - component: {fileID: 114681419340254488}
   m_Layer: 8
   m_Name: Robot
   m_TagString: Untagged
@@ -1015,6 +1016,24 @@ MonoBehaviour:
     ray: {x: 0, y: -0.2, z: 0}
     all: 0
     maximumSlopeAngle: 50
+--- !u!114 &114681419340254488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1080471955604474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57d5355c1192684487ed3977c9bc475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 23058757682671592}
+  hips: {fileID: 23153692026731226}
+  limbs:
+  - {fileID: 23704441486242776}
+  - {fileID: 23688286820096326}
+  - {fileID: 23462785115620708}
+  - {fileID: 23253550195031606}
 --- !u!114 &114794848452364862
 MonoBehaviour:
   m_ObjectHideFlags: 1

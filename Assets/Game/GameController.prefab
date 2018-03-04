@@ -51,8 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1000d71543aa93c47b2249a905d3b894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCount: 4
+  gameTime: 30
   screen: {fileID: 114302923288511792, guid: a4d799eb2c20db845807d84132cfb850, type: 2}
   playerPrefab: {fileID: 114794848452364862, guid: 6cc4daa1dea8f1e40b54304eff9f6b45,
     type: 2}
-  playerCount: 4
   startCountdown: {fileID: 0}
+  endGameTimer: {fileID: 0}
+  swatches:
+  - {fileID: 11400000, guid: 0e30b372e9c67b4499f1e34ac3015f1a, type: 2}
+  - {fileID: 11400000, guid: 5d79971f1c0301e4db2299c55a4091aa, type: 2}
