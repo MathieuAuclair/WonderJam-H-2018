@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea215a1eaf096e342a32006fe52f740a, type: 3}
+  m_Name: Player2
+  m_EditorClassIdentifier: 
+  body: {fileID: 2100000, guid: 7db1efc3012e6984d923da677403ebfa, type: 2}
+  glass: {fileID: 2100000, guid: e9648c2b6de823740a20dc665e2495d2, type: 2}
+  limb: {fileID: 2100000, guid: 432a6ecee3f031f47ae43e576f2a7766, type: 2}
+  joint: {fileID: 2100000, guid: 570db953ca0de3343ab25b97ab880450, type: 2}
