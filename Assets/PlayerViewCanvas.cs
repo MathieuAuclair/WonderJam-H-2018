@@ -20,7 +20,7 @@ public class PlayerViewCanvas : MonoBehaviour
 
 	public void SetPlayerScore (float score)
 	{
-		tmScore.text = score.ToString ();
+		tmScore.text = "$" + score.ToString("0.00") + " M";
 	}
 
 	void Update ()
