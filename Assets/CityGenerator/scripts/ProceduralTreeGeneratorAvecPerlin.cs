@@ -57,7 +57,8 @@ namespace AssemblyCSharp
                     {
                         limiteModele[index_modele_arbres]--;
                     }
-                    Instantiate(modele, transform.position + p - (transform.localScale / 2), Quaternion.Euler(0, Random.Range(0, 4) * 90, 0));
+                    var instance = Instantiate(modele, transform.position + p - (transform.localScale / 2), Quaternion.Euler(0, Random.Range(0, 4) * 90, 0));
+					instance.transform.SetParent (this.transform);
                 }
                 
             }
