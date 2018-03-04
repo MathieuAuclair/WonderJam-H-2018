@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114621191281453628}
   - component: {fileID: 95483674876219948}
   - component: {fileID: 136502526364139178}
+  - component: {fileID: 114700220298361900}
   m_Layer: 8
   m_Name: PlayerRobot
   m_TagString: Untagged
@@ -141,6 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36efa2e439c190147b5f8da35b9607e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  body: {fileID: 0}
   movement:
     enabled: 1
     stateBoolean: 
@@ -152,6 +155,11 @@ MonoBehaviour:
     stateBoolean: 
     power: 2000
     fullCharge: 3
+  torso:
+    enabled: 1
+    stateBoolean: 
+    torso: {fileID: 0}
+    power: 0
   ground:
     radius: 2.5
     layers:
@@ -165,6 +173,18 @@ MonoBehaviour:
     ray: {x: 0, y: -0.21, z: 0}
     all: 0
     maximumSlopeAngle: 50
+--- !u!114 &114700220298361900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1669928739146860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7874bea6b8274ce1b3c4f49ecb49a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namesJson: {fileID: 4900000, guid: 65f8298252f942244844aa5fff93c57c, type: 3}
 --- !u!136 &136502526364139178
 CapsuleCollider:
   m_ObjectHideFlags: 1
