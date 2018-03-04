@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23098966472454324}
   - component: {fileID: 64161914469727384}
   - component: {fileID: 54783059264496746}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 23414875742355948}
   - component: {fileID: 64934461356018586}
   - component: {fileID: 54588914041374944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 23377094871164294}
   - component: {fileID: 64148932652286740}
   - component: {fileID: 54838127477732476}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 23972564166243398}
   - component: {fileID: 64145282710984552}
   - component: {fileID: 54405287637487736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 23282075161854076}
   - component: {fileID: 64098582835284310}
   - component: {fileID: 54628412035456552}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 64585119134360638}
   - component: {fileID: 54582812531219334}
   - component: {fileID: 114333121381976714}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BuildingTower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 23382080604924488}
   - component: {fileID: 64246501037503176}
   - component: {fileID: 54371772783475986}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 23414101284474690}
   - component: {fileID: 64679876329168340}
   - component: {fileID: 54923297465464920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 23394730960781188}
   - component: {fileID: 64725742226048876}
   - component: {fileID: 54081292564612078}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 23949658441467482}
   - component: {fileID: 64490982123602426}
   - component: {fileID: 54980798293787992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 23987809231710790}
   - component: {fileID: 64982506901523366}
   - component: {fileID: 54776096644331586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 23769912233188288}
   - component: {fileID: 64127610545557910}
   - component: {fileID: 54950246782857712}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4969799130435258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BuildingTowerPlaceholder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 23644421816262346}
   - component: {fileID: 64136701503725238}
   - component: {fileID: 54519592452672578}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 23586430377415460}
   - component: {fileID: 64435107732489884}
   - component: {fileID: 54088322363110762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002_cell_003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 23977878092348784}
   - component: {fileID: 64960063185470164}
   - component: {fileID: 54657380008787632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ Transform:
   m_GameObject: {fileID: 1504014494841022}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4911637372592062}
   - {fileID: 4623259936953262}
