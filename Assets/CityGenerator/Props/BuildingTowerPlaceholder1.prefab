@@ -348,7 +348,7 @@ Transform:
   m_GameObject: {fileID: 1668798013913988}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 4339199136631760}
   - {fileID: 4947898009992752}
@@ -947,7 +947,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668798013913988}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -1175,5 +1175,7 @@ MonoBehaviour:
   soundOnExplode: 0
   clips: []
   particlesOnExplode: 0
+  propLifeSpan: 5
+  isPropDestroyedAfterLifeSpan: 0
   hitParticle: {fileID: 1252412786230152, guid: 7777eed54d147834c9e870397285ae26,
     type: 2}
