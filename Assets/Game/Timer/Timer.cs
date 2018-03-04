@@ -42,6 +42,7 @@ public class Timer : MonoBehaviour
 
     void End()
     {
+        CrackleAudio.SoundController.PlaySound("shutdown");
         running = false;
         display.text = "0";
         onEnd();
