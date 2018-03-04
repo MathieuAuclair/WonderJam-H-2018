@@ -25,7 +25,10 @@ public abstract class Character : MonoBehaviour
     {
         foreach (CharacterModule module in modules)
         {
-            module.OnCollisionEnter(collision);
+            if (module.IsEnabled)
+            {
+                module.OnCollisionEnter(collision);
+            }
         }
     }
 
