@@ -75,4 +75,16 @@ public class BlenderToUnityPipeline
 		SetKinematicAndConvex (selected);
 		SetMeshColliderFromFirstChild (selected);
 	}
+
+	[MenuItem ("Tools/BlenderRotateFix")]
+	static void NewMenuOptionRotateOnly ()
+	{
+		Transform selected = Selection.activeTransform;
+		var parentObjectFix = new GameObject ();
+		parentObjectFix.name = selected.name  + " fix";
+		selected.rotation = Quaternion.Euler (new Vector3 (-90, 0, 0));
+		parentObjectFix.transform.rotation = Quaternion.Euler (Vector3.zero);
+		selected.SetParent (parentObjectFix.transform);
+		ResetTransfrom (selected);
+	}
 }
