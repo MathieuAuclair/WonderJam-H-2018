@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 2100000, guid: f26e4453b2adb3548847c8f225f39d33, type: 2}
   glass: {fileID: 2100000, guid: 116aeb1fd0fe02b408c4f472f8adf903, type: 2}
-  limb: {fileID: 2100000, guid: 795d28927b2891d40b4069b41f6dec66, type: 2}
+  limb: {fileID: 2100000, guid: 047701af7ff094340a3710f688d4a8d2, type: 2}
   joint: {fileID: 2100000, guid: 831569cbde5f2a44f814c212b7c40f47, type: 2}
