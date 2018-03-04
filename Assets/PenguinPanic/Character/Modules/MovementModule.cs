@@ -39,6 +39,20 @@ public class MovementModule : CharacterModule
 
     public bool IsWalking { get; private set; }
 
+    public override bool IsEnabled
+    {
+        get { return base.IsEnabled; }
+        set
+        {
+            base.IsEnabled = value;
+            if (!value)
+            {
+                MoveTowardsLocal(0, 0, 0);
+                ProcessInput();
+            }
+        }
+    }
+
     /// <summary>
     /// Sets object horizontal velocity. Final movement will be influenced by speed.
     /// Input data are considered to be in the object's local coordinates.

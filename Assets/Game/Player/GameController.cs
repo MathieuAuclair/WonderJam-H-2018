@@ -97,6 +97,7 @@ public class GameController : MonoBehaviour
         foreach (var player in players.Values)
         {
             player.UnsubscribeEverything();
+            player.GetComponentInChildren<Robot>().ShutDown();
         }
     }
 }
