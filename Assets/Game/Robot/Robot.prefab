@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 95725127135505540}
   - component: {fileID: 114794848452364862}
   - component: {fileID: 114945209972053172}
+  - component: {fileID: 114681419340254488}
+  - component: {fileID: 114108016969598316}
   m_Layer: 8
   m_Name: Robot
   m_TagString: Untagged
@@ -937,6 +939,18 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.05
   m_Autodestruct: 0
+--- !u!114 &114108016969598316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1080471955604474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7874bea6b8274ce1b3c4f49ecb49a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namesJson: {fileID: 4900000, guid: 65f8298252f942244844aa5fff93c57c, type: 3}
 --- !u!114 &114286911677813984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -992,6 +1006,10 @@ MonoBehaviour:
     maximumSpeed: 12
     maximumSlopeAngle: 50
     wall: {fileID: 0}
+  fastBoost:
+    enabled: 0
+    stateBoolean: 
+    speedModifier: 1.6
   jetpack:
     enabled: 1
     stateBoolean: 
@@ -1002,6 +1020,10 @@ MonoBehaviour:
     stateBoolean: 
     torso: {fileID: 54253436142811556}
     power: 100
+  laser:
+    enabled: 1
+    stateBoolean: 
+    laser: {fileID: 0}
   ground:
     radius: 1.6
     layers:
@@ -1015,6 +1037,24 @@ MonoBehaviour:
     ray: {x: 0, y: -0.2, z: 0}
     all: 0
     maximumSlopeAngle: 50
+--- !u!114 &114681419340254488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1080471955604474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57d5355c1192684487ed3977c9bc475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 23058757682671592}
+  hips: {fileID: 23153692026731226}
+  limbs:
+  - {fileID: 23704441486242776}
+  - {fileID: 23688286820096326}
+  - {fileID: 23462785115620708}
+  - {fileID: 23253550195031606}
 --- !u!114 &114794848452364862
 MonoBehaviour:
   m_ObjectHideFlags: 1

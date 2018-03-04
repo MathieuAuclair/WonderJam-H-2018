@@ -5,6 +5,7 @@ public static class CharacterAction
     public const string MOVE = "Move";
     public const string JETPACK = "P{0}Jump";
     public const string TORSO = "Torso";
+    public const string LASER = "P{0}Action2";
 }
 
 /// <summary>
@@ -25,7 +26,10 @@ public abstract class Character : MonoBehaviour
     {
         foreach (CharacterModule module in modules)
         {
-            module.OnCollisionEnter(collision);
+            if (module.IsEnabled)
+            {
+                module.OnCollisionEnter(collision);
+            }
         }
     }
 

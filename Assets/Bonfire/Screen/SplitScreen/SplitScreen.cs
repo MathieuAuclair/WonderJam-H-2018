@@ -104,5 +104,13 @@ namespace Bonfire
                 isAtPosition |= view.isAt(position);
             return isAtPosition;
         }
+
+        public override void CleanUp()
+        {
+            foreach (var view in mappedViews.Values)
+            {
+                Destroy(view.camera);
+            }
+        }
     }
 }

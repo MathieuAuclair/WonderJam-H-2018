@@ -31,7 +31,7 @@ public class BlenderToUnityPipeline
 	{
 		Destruction destruction = t.gameObject.GetComponent<Destruction> ();
 		destruction.startBroken = false;
-		destruction.breakOnCollision = true;
+		destruction.explodeOnCollision = true;
 	}
 
 	static void SetKinematicAndConvex (Transform t)
@@ -74,5 +74,17 @@ public class BlenderToUnityPipeline
 		AddMeshColliderAndRigidbody (selected);
 		SetKinematicAndConvex (selected);
 		SetMeshColliderFromFirstChild (selected);
+	}
+
+	[MenuItem ("Tools/BlenderRotateFix")]
+	static void NewMenuOptionRotateOnly ()
+	{
+		Transform selected = Selection.activeTransform;
+		var parentObjectFix = new GameObject ();
+		parentObjectFix.name = selected.name  + " fix";
+		selected.rotation = Quaternion.Euler (new Vector3 (-90, 0, 0));
+		parentObjectFix.transform.rotation = Quaternion.Euler (Vector3.zero);
+		selected.SetParent (parentObjectFix.transform);
+		ResetTransfrom (selected);
 	}
 }

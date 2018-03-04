@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerController playerPrefab;
     [SerializeField] CountDown startCountdown;
     [SerializeField] Timer endGameTimer;
+    [SerializeField] ColorSwatch[] swatches;
+    [SerializeField] Camera periphericView;
+    [SerializeField] IntroScreen intro;
+    [SerializeField] GameObject leaderBoard;
 
     IDictionary<int, PlayerController> players = new Dictionary<int, PlayerController>();
 
@@ -28,19 +33,22 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        screen = Instantiate(screen);
         screen.Initialize();
     }
 
     void Update()
     {
         screen.Update();
-
         switch (currentPhase)
         {
             case Phase.REGISTRATION:
                 UpdateRegistration();
                 break;
             case Phase.GAME:
+                break;
+            case Phase.END:
+                UpdateEndGame();
                 break;
         }
     }
@@ -53,13 +61,16 @@ public class GameController : MonoBehaviour
             {
                 if (Input.GetButtonDown(string.Format(JOIN, i)))
                 {
+                    intro.HideLogo();
                     AddPlayer(i);
+                    periphericView.gameObject.SetActive(false);
                 }
             }
             else if (Input.GetButtonDown("StartGame"))
             {
                 currentPhase = Phase.GAME;
                 startCountdown.Initiate(3, "DÉTRUISEZ!!!", BeginGame);
+                intro.HideInstructions();
             }
         }
     }
@@ -75,6 +86,22 @@ public class GameController : MonoBehaviour
     {
         RemoveControl();
         currentPhase = Phase.END;
+        Invoke("ShowLeaderBoard", 3);
+    }
+
+    void ShowLeaderBoard()
+    {
+        periphericView.gameObject.SetActive(true);
+        screen.CleanUp();
+        leaderBoard.SetActive(true);
+    }
+
+    void UpdateEndGame()
+    {
+        if (Input.GetButtonDown("StartGame"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void AddPlayer(int playerId)
@@ -83,6 +110,10 @@ public class GameController : MonoBehaviour
         player.PlayerId = playerId;
         screen.Register(player.GetComponentInChildren<Character>().transform);
         players.Add(playerId, player);
+        if (swatches.Length <= playerId)
+        {
+            player.GetComponent<Painter>().ApplySwatch(swatches[playerId - 1]);
+        }
     }
 
     void GiveControl()

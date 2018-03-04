@@ -4,8 +4,10 @@ public class Robot : Character
 {
     [Header("Modules")]
     [SerializeField] MovementModule movement;
+    [SerializeField] FastBoost fastBoost;
     [SerializeField] JetPackModule jetpack;
     [SerializeField] TorsoModule torso;
+    [SerializeField] LaserModule laser;
 
     [Header("Sensors")]
     [SerializeField] GroundSensor ground;
@@ -15,8 +17,10 @@ public class Robot : Character
         InitializeModules(new CharacterModule[]
             {
                 movement,
+                fastBoost,
                 jetpack,
                 torso,
+                laser,
             });
 
         ground.Initialize();
@@ -33,6 +37,7 @@ public class Robot : Character
         Controller.Subscribe(CharacterAction.MOVE, Move);
         Controller.Subscribe(CharacterAction.JETPACK, jetpack.Begin, jetpack.End);
         Controller.Subscribe(CharacterAction.TORSO, torso.Rotate);
+        Controller.Subscribe(CharacterAction.LASER, laser.Activate, laser.Deactivate);
     }
 
     void Move(float h, float v)

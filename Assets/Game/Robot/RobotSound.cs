@@ -6,6 +6,6 @@ public class RobotSound : MonoBehaviour {
 
     public void WalkSound()
     {
-        CrackleAudio.SoundController.PlaySound("robotwalking");
+        CrackleAudio.SoundController.PlaySound("robotwalking", 0.25f);
     }
 }
