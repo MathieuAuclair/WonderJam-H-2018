@@ -75,7 +75,12 @@ MonoBehaviour:
   - name: scream
     sounds:
     - {fileID: 8300000, guid: e6e9eb511469a3e47b5221ed38c0a373, type: 3}
-    - {fileID: 8300000, guid: 9cdc8592923f65a45a7d88896f334cdb, type: 3}
+  - name: countdown
+    sounds:
+    - {fileID: 8300000, guid: b0e366c0a6a7b20498d1605060f8386f, type: 3}
+  - name: go
+    sounds:
+    - {fileID: 8300000, guid: ca3343be8073f1146bd63a84ba21902c, type: 3}
   musics:
   - name: main
     sounds:
