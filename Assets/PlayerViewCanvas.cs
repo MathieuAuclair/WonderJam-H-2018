@@ -25,6 +25,8 @@ public class PlayerViewCanvas : MonoBehaviour
 
 	void Update ()
 	{
-		SetPlayerScore (ScoreBoard.GetScore (_playerId));
+		if (_playerId != 0) {
+			SetPlayerScore (ScoreBoard.GetScore (_playerId));
+		}
 	}
 }

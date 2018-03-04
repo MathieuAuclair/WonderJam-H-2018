@@ -51,6 +51,12 @@ public class PlayerView : MonoBehaviour
         view.LookAt(target.position + Vector3.up * verticalOffset);
     }
 
+	void Start() {
+		var playerController = target.GetComponentInParent<PlayerController> ();
+		GetComponent<PlayerViewCanvas> ().SetPlayerId (playerController.PlayerId);
+		GetComponent<PlayerViewCanvas> ().SetPlayerName (playerController.PlayerName);
+	}
+
     /// <summary>
     /// Sets the target of the camera. Camera's distance from the target is affected by
     /// baseOffset, previewLenght and target's velocity.

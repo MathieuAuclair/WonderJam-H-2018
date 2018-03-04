@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114794848452364862}
   - component: {fileID: 114945209972053172}
   - component: {fileID: 114681419340254488}
+  - component: {fileID: 114108016969598316}
   m_Layer: 8
   m_Name: Robot
   m_TagString: Untagged
@@ -938,6 +939,18 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.05
   m_Autodestruct: 0
+--- !u!114 &114108016969598316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1080471955604474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7874bea6b8274ce1b3c4f49ecb49a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  namesJson: {fileID: 4900000, guid: 65f8298252f942244844aa5fff93c57c, type: 3}
 --- !u!114 &114286911677813984
 MonoBehaviour:
   m_ObjectHideFlags: 1
