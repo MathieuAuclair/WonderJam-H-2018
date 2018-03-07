@@ -20,16 +20,6 @@ public class MovementModule : CharacterModule
     [SerializeField]
     float maximumSpeed;
 
-    [Tooltip(
-        "Anything under this value is considered to be ground. Anything over is " +
-        "considered to be a wall.")]
-    [SerializeField][Range(0, 90)] float maximumSlopeAngle;
-
-
-    [Tooltip(
-        "Used for wall collision detection.")]
-    [SerializeField] WallDetector wall;
-
     Move input;
     Vector3 facing;
 
@@ -76,21 +66,16 @@ public class MovementModule : CharacterModule
         if (CanWalk && Ground.IsGrounded)
         {
             EnableState();
-            movement = GetGroundMovement();
         }
         else
         {
             DisableState();
-            IsWalking = false;
-            movement = new Vector3(
-                input.h, 0, input.v).normalized * maximumSpeed * input.speedRatio;
-            facing = movement;
-            movement.y = OwnBody.velocity.y;
         }
-        if (wall != null && wall.IsColliding && Vector3.Dot(movement, wall.Facing) < 0)
-        {
-            movement = Vector3.ProjectOnPlane(movement, wall.Facing);
-        }
+
+        movement = new Vector3(
+            input.h, 0, input.v).normalized * maximumSpeed * input.speedRatio;
+        facing = movement;
+        movement.y = OwnBody.velocity.y;
 
         OwnBody.velocity = movement;
     }
@@ -112,10 +97,6 @@ public class MovementModule : CharacterModule
 
     public override void FixedUpdate()
     {
-        if (wall != null && !(Mathf.Approximately(input.h, 0) && Mathf.Approximately(input.v, 0)))
-        {
-            wall.SensedDirection = new Vector3(input.h, 0, input.v);
-        }
         ProcessInput();
         AdjustFacing();
     }

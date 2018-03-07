@@ -747,7 +747,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1700170951491362}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.5
   m_UseGravity: 1
@@ -1284,12 +1284,10 @@ MonoBehaviour:
     enabled: 1
     stateBoolean: isWalking
     maximumSpeed: 12
-    maximumSlopeAngle: 50
-    wall: {fileID: 0}
   heavyArm:
     enabled: 0
     stateBoolean: 
-    upgradedWeight: 15
+    weightMultiplier: 3
   bigArm:
     enabled: 0
     stateBoolean: 
@@ -1304,7 +1302,7 @@ MonoBehaviour:
   jetpack:
     enabled: 1
     stateBoolean: 
-    power: 80
+    power: 400
     fullCharge: 0.67
   torso:
     enabled: 1

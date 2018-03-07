@@ -56,20 +56,20 @@ public class Destruction : MonoBehaviour
     [Header("Prefab powerup")]
     public List<GameObject> powerUps;
 
-	[SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
-	[SerializeField] public string particlePoolName = "HitPool";
+    [SerializeField] const string TAG_ALLOWED_TO_EXPLODE_THINGS = "Player";
+    [SerializeField] public string particlePoolName = "HitPool";
 
     AudioSource src;
 
     Collider coll;
     Rigidbody[] rigids;
-	MeshRenderer[] renderers;
-	List<Transform> currentlyPlayingParticles;
-	GameObjectPool _pool;
+    MeshRenderer[] renderers;
+    List<Transform> currentlyPlayingParticles;
+    GameObjectPool _pool;
 
     void Start()
-	{
-		_pool = GameObjectPool.GetPool (particlePoolName);
+    {
+        _pool = GameObjectPool.GetPool(particlePoolName);
         renderers = gameObject.GetComponentsInChildren<MeshRenderer>();
         rigids = gameObject.GetComponentsInChildren<Rigidbody>();
         SetRenderersEnabled(false);
@@ -77,9 +77,10 @@ public class Destruction : MonoBehaviour
         SetPiecesKinematic(!startBroken);
     }
 
-	void Awake(){
-		currentlyPlayingParticles = new List<Transform> ();
-	}
+    void Awake()
+    {
+        currentlyPlayingParticles = new List<Transform>();
+    }
 
     void SetRenderersEnabled(bool value)
     {
@@ -89,44 +90,48 @@ public class Destruction : MonoBehaviour
         }
     }
 
-	void Update(){
-		List<Transform> toDelete = new List<Transform> ();
-		foreach (var effect in currentlyPlayingParticles) {
-			if (!effect.GetComponentInChildren<ParticleSystem> ().IsAlive (true)) {
-				toDelete.Add (effect);
-				_pool.ReleaseInstance (effect);
-			}
-		}
-		foreach (var effectToDelete in toDelete) {
-			currentlyPlayingParticles.Remove (effectToDelete);
-		}
-	}
+    void Update()
+    {
+        List<Transform> toDelete = new List<Transform>();
+        foreach (var effect in currentlyPlayingParticles)
+        {
+            if (!effect.GetComponentInChildren<ParticleSystem>().IsAlive(true))
+            {
+                toDelete.Add(effect);
+                _pool.ReleaseInstance(effect);
+            }
+        }
+        foreach (var effectToDelete in toDelete)
+        {
+            currentlyPlayingParticles.Remove(effectToDelete);
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag(TAG_ALLOWED_TO_EXPLODE_THINGS) && explodeOnCollision)
         {
-            if (collision.relativeVelocity.magnitude > velocityToExplode)
+            if (collision.relativeVelocity.sqrMagnitude * collision.rigidbody.mass > velocityToExplode * velocityToExplode)
             {
                 ExplodeEverything();
-				CrackleAudio.SoundController.PlaySound("destruction");
-				var a = _pool.GetInstance (collision.transform.position);
-				a.GetComponentInChildren<ParticleSystem> ().Play ();
-				currentlyPlayingParticles.Add (a);
+                CrackleAudio.SoundController.PlaySound("destruction");
+                var a = _pool.GetInstance(collision.transform.position);
+                a.GetComponentInChildren<ParticleSystem>().Play();
+                currentlyPlayingParticles.Add(a);
                 int scream = Random.Range(0, 4);
                 if (scream == 1)
                 {
                     CrackleAudio.SoundController.PlaySound("scream");
                 }
-				UpdateScore (collision, UnityEngine.Random.Range(1f, GetComponent<Destruction>().velocityToExplode));
+                UpdateScore(collision, UnityEngine.Random.Range(1f, GetComponent<Destruction>().velocityToExplode));
             }
         }
-	}
+    }
 
-	static void UpdateScore (Collision collision, float amount)
-	{
-		ScoreBoard.IncreaseScore (collision.gameObject.GetComponentInParent<PlayerController> ().PlayerId, amount);
-	}
+    static void UpdateScore(Collision collision, float amount)
+    {
+        ScoreBoard.IncreaseScore(collision.gameObject.GetComponentInParent<PlayerController>().PlayerId, amount);
+    }
 
     public void ExplodeEverything()
     {

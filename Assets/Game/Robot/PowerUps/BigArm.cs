@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class BigArm : CharacterModule
@@ -13,10 +11,12 @@ public class BigArm : CharacterModule
     [SerializeField]
     float sizeRatio = 4;
 
-    public override bool IsEnabled {
-        get { return base.IsEnabled;}
-        set {
-            if(value)
+    public override bool IsEnabled
+    {
+        get { return base.IsEnabled; }
+        set
+        {
+            if (value)
                 BuffArms();
             base.IsEnabled = value;
         }
@@ -24,7 +24,10 @@ public class BigArm : CharacterModule
 
     void BuffArms()
     {
-        rightArm.localScale = new Vector3(rightArm.localScale.x * sizeRatio, rightArm.localScale.y * sizeRatio, rightArm.localScale.z * sizeRatio);
-        leftArm.localScale = new Vector3(leftArm.localScale.x * sizeRatio, leftArm.localScale.y * sizeRatio, leftArm.localScale.z * sizeRatio);
+        rightArm.localScale *= sizeRatio;
+        rightArm.GetComponent<Rigidbody>().mass *= sizeRatio * sizeRatio;
+        leftArm.localScale *= sizeRatio;
+        leftArm.GetComponent<Rigidbody>().mass *= sizeRatio * sizeRatio;
     }
+
 }

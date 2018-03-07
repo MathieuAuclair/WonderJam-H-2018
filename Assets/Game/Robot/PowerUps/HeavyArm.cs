@@ -1,26 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class HeavyArm : CharacterModule
 {
     [SerializeField]
-    float upgradedWeight = 15.0f;
+    float weightMultiplier = 3;
 
-      public override bool IsEnabled {
-        get { return base.IsEnabled;}
-        set {
-            if(value)
-                BuffArms();
+    public override bool IsEnabled
+    {
+        get { return base.IsEnabled; }
+        set
+        {
+            if (value)
+            {
+                OwnBody.mass *= weightMultiplier;
+            }
+            else
+            {
+                OwnBody.mass /= weightMultiplier;
+            }
             base.IsEnabled = value;
         }
-    }
-
-   
- void BuffArms()
-
-    {
-        OwnBody.mass = upgradedWeight;
     }
 }
